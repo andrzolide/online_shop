@@ -1,0 +1,12 @@
+header normalny wyglad czyli jakieś divy sensownie wygladajace zamiast tych buttonow bo to nie jest dużo roboty a da +10000 do wyglądyu.
+
+header - pole na ilosc produktow w koszyku oraz wartosc koszyka.
+
+koszyk - zmienianie ilosc produktow w koszyku czyli ten czerwony i zielony kwadracik to maja byc zwykłe linki bez zadnego js.
+
+DO ZROBIENIA BACKEND:
+zapisywanie produktów do zamówień w odpowiedni sposob w zaleznosci od tego czy maja n r seryjny czy nie. 
+odczyt odpowiedni tego wszystkiego w zamowieniach. 
+to jest ostatnia gruba akcja w tym projekcie. potem zwroty , reklamacje itd to juz jest ez. 
+
+

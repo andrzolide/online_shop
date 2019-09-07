@@ -44,6 +44,7 @@
 				$_SESSION['zboze'] = $wiersz['zboze'];
 				$_SESSION['email'] = $wiersz['email'];
 				$_SESSION['dnipremium'] = $wiersz['dnipremium'];
+				$_SESSION['adres'] = $wiersz['adres'];
 				
 				unset($_SESSION['blad']);
 				$rezultat->free_result();
