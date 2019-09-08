@@ -3,27 +3,6 @@
 
   include "includes/czy-zalogowany.php";
 
-  // require_once "classes-and-functions.php";
-
-  // require_once "connect.php";
-  // $polaczenie = @new mysqli($host, $db_user, $db_password, $db_name);
-
-  // //include klas.
-
-
-  // //zmienne globalne
-
-
-  // //funkcje i klasy lokalne.
-
-
-  // //kod
-
-  // $zapytanie= "";
-
-  // if(isset($_SESSION['id'])){
-  //   $zapytanie= "INSERT adres_docelowy INTO uzytkownicy WHERE id"
-  // }
 ?>
 
 
@@ -56,58 +35,33 @@ include "header.php"
  <div class="form-group row">
     <label  class="col-sm-2 col-form-label">Imię</label>
     <div class="col-sm-3">
-      <input  class="form-control" name="surname" placeholder="Podaj imię" value="<?php echo $_SESSION['user']; ?>">
+      <input  class="form-control" name="imie" placeholder="Podaj imię" value="<?php echo $_SESSION['imie']; ?>">
     </div>
 	
-	<label  class="col-sm-1 col-form-label">Użytkownik</label>
+	<label  class="col-sm-1 col-form-label">Nazwisko</label>
     <div class="col-sm-3">
-      <input  class="form-control" name="user" placeholder="Login" value="<?php echo $_SESSION['user']; ?>">
+      <input  class="form-control" name="nazwisko" placeholder="Login" value="<?php echo $_SESSION['nazwisko']; ?>">
     </div>
   </div>
 
-  <div class="form-group row">
-    <label class="col-sm-2 col-form-label">Nazwisko</label>
-    <div class="col-sm-3">
-      <input  class="form-control"  placeholder="Podaj nazwisko" value="<?php echo $_SESSION['user']; ?> ">
 
-
-    </div>
-	<label  class="col-sm-1 col-form-label">Zmien hasło</label>
-    <div class="col-sm-3">
-      <input type="password" class="form-control" name="inputPassword" placeholder="Password" value="<?php echo $_SESSION['kamien']; ?>">
-    </div>
-  </div>
 
  <div class="form-group row">
-    <label  class="col-sm-2 col-form-label">Miasto</label>
+    <label  class="col-sm-2 col-form-label">Login</label>
     <div class="col-sm-3">
-      <input  class="form-control" name="city" placeholder="Podaj miasto" value="<?php echo $_SESSION['drewno']; ?>">
+      <input  class="form-control" name="login" placeholder="Podaj miasto" value="<?php echo $_SESSION['login']; ?>">
     </div>
   </div>
 
-  <div class="form-group row">
-    <label for="inputPassword" class="col-sm-2 col-form-label">Ulica</label>
-    <div class="col-sm-3">
-      <input class="form-control" name="street" placeholder="Podaj ulice" value="<?php echo $_SESSION['zboze']; ?>">
-    </div>
-  </div>
 
   <div class="form-group row">
-    <label for="inputPassword" class="col-sm-2 col-form-label">Kod pocztowy</label>
+    <label for="inputPassword" class="col-sm-2 col-form-label">Domyślny adres</label>
     <div class="col-sm-3">
-      <input class="form-control" name="postalCode" placeholder="Podaj kod pocztowy" value="<?php echo $_SESSION['drewno']; ?>">
-    </div>
-  </div>
-
-  <div class="form-group row">
-    <label for="inputPassword" class="col-sm-2 col-form-label">Email</label>
-    <div class="col-sm-3">
-      <input class="form-control" name="email" placeholder="Podaj email"value="<?php echo $_SESSION['email']; ?>">
+      <input class="form-control" name="domyslny_adres" placeholder="Podaj email"value="<?php echo $_SESSION['domyslny_adres']; ?>">
     </div>
   </div>
   <input type="submit" class="btn btn-success" value="Zapisz" />
 </form>
-<?php echo $_SESSION['adres']; ?>
 
 
 <div class="container">

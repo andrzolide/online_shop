@@ -58,8 +58,7 @@ include "info-blad.php"
       <td><?php echo $value->produkt->getNazwa() ?></td>
       <td><?php echo $value->produkt->getCena() ?></td>
       <td>
-        <a style="color:red;" href="functions/usun-z-koszyka.php?id_produktu=<?php echo $value->produkt->getId()."&cena=".$value->produkt->getCena()."&target=koszyk" ?>">usun</a>
-        <a style="color:green;" href="functions/dodaj-do-koszyka.php?id_produktu=<?php echo $value->produkt->getId()."&cena=".$value->produkt->getCena()."&target=koszyk" ?>">dodaj</a>
+        
         
 	  <div class="center">
       </p><div class="input-group">
@@ -67,7 +66,7 @@ include "info-blad.php"
    
           
           <span class="input-group-btn">
-              <button type="button" class="btn btn-success btn-number btn" data-type="plus" ></button>
+            <a style="color:green;" href="functions/dodaj-do-koszyka.php?id_produktu=<?php echo $value->produkt->getId()."&cena=".$value->produkt->getCena()."&target=koszyk" ?>">dodaj</a>
           </span>
       </div>
 	<p></p>

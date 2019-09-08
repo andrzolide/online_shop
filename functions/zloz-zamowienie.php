@@ -112,5 +112,5 @@
 
 // $conn->close();
 
-//header('Location: ../sklep.php?info=Pomyślnie złożono zamówienie');
+header('Location: ../sklep.php?info=Pomyślnie złożono zamówienie');
 ?>

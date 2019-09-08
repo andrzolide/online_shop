@@ -37,7 +37,7 @@
       if ($rezultat = @$polaczenie->query($zapytanie)){
         if ($rezultat->num_rows > 0) {
             while($row = $rezultat->fetch_assoc()) {
-              $count = count(array_keys($_SESSION['chart'], $row['id']));
+              //$count = count(array_keys($_SESSION['chart'], $row['id']));
               array_push($produkty, new ProduktKoszyk(new Produkt($row['id'],$row['cena'],$row['nazwa'],$row['id_kategorii']),
                 $count,$row['ilosc_w_magazynie'],$row['nr_seryjny']));
             }

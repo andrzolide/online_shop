@@ -19,26 +19,29 @@
 
   //kod
 
-  $zapytanie= "";
 
-  $user=$_POST['user'];
   $id=$_SESSION['id'];
-  $email=$_POST['email'];
-  echo $id;
-  echo $user;
+  $login=$_POST['login'];
+  $imie=$_POST['imie'];
+  $nazwisko=$_POST['nazwisko'];
+  $domyslny_adres=$_POST['domyslny_adres'];
 
-  $zapytanie = "UPDATE uzytkownicy SET user='$user', email='$email'  WHERE id=$id";
+  $message="";
 
-
+  $zapytanie= "";
+  $zapytanie = "UPDATE klienci SET login='$login', imie='$imie', nazwisko='$nazwisko', domyslny_adres='$domyslny_adres'  WHERE id=$id";
 
   if($rezultat = @$polaczenie->query($zapytanie)){
     echo "Pomyślnie dodano do bazy danych";
-    $_SESSION['user']=$user;
-    $_SESSION['email']=$email;
+    $_SESSION['login']=$login;
+    $_SESSION['imie']=$imie;
+    $_SESSION['nazwisko']=$nazwisko;
+    $_SESSION['domyslny_adres']=$domyslny_adres;
+    $message="info=Pomyślnie zapisano dane";
   }
   else{
-    echo "Błąd przy wykonywaniu zapytania";
+    $message="blad=Nie udało się zapisać danych";
   }
 
-  header('Location: ../moje-dane.php');
+  header('Location: ../sklep.php?'.$message);
 ?>
