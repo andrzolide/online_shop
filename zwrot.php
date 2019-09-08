@@ -1,3 +1,11 @@
+<?php
+  include "includes/czy-zalogowany.php";
+
+
+
+  ?>
+
+
 <!DOCTYPE HTML>
 <html lang="pl">
 <head>

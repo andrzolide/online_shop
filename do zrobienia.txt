@@ -5,8 +5,4 @@ header - pole na ilosc produktow w koszyku oraz wartosc koszyka.
 koszyk - zmienianie ilosc produktow w koszyku czyli ten czerwony i zielony kwadracik to maja byc zwykłe linki bez zadnego js.
 
 DO ZROBIENIA BACKEND:
-zapisywanie produktów do zamówień w odpowiedni sposob w zaleznosci od tego czy maja n r seryjny czy nie. 
-odczyt odpowiedni tego wszystkiego w zamowieniach. 
-to jest ostatnia gruba akcja w tym projekcie. potem zwroty , reklamacje itd to juz jest ez. 
-
-
+filtry do tego czy sa produkty czy ich juz nie ma czy np zostąły wyprzedane. bedziemy potrzebowali info o numerach seryjnych w sklep.php wiec zastanowic sie nad modyfikacja lekka tego jak wczytujemy produkty i czy nie rozszerzyć ich o wczytywanie też wszytkiego tak jak w koszykach. 

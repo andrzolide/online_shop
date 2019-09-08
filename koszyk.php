@@ -43,7 +43,7 @@ include "info-blad.php"
       <th scope="col">Cena</th>
       <th scope="col">Ilość</th>
       <th scope="col">Ilość dostępnych</th>
-	  <th scope="col">Usuń</th>
+	     <th scope="col">Usuń</th>
 
     </tr>
   </thead>
@@ -63,11 +63,6 @@ include "info-blad.php"
         
 	  <div class="center">
       </p><div class="input-group">
-          <span >
-              <a href="functions/dodaj-do-koszyka.php?id_produktu=<?php echo $value->produkt->getId()."&cena=".$value->produkt->getCena() ?>"><button type="button" class="btn btn-danger btn-number btn"  ></button></a>
-          </span>
-   
-
         <input type="text" name="quant[2]" class="form-control input-number" value=" <?php echo $value->getIlosc() ?>" min="1" max="100">
    
           

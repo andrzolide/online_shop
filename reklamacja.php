@@ -1,3 +1,11 @@
+<?php
+  include "includes/czy-zalogowany.php";
+
+$nazwa_produktu="";
+if(isset($_GET['nazwa_prod']))
+  ?>
+
+
 <!DOCTYPE HTML>
 <html lang="pl">
 <head>

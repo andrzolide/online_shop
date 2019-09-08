@@ -68,6 +68,64 @@
 	   	}  
 	}
 
+		class ProduktZamowienie{
+		private $id_produktu;
+		private $nazwa;
+		private $ilosc;
+		private $cena;
+		private $numer_seryjny;
+		private $data;
+		private $id_zamowienia;
+		private $adres_dostawy;
+
+		public function __construct($id_produktu, $nazwa, $ilosc, $cena, $numer_seryjny, $data, $id_zamowienia, $adres_dostawy)
+	   	{
+	   		$this->id_produktu=$id_produktu;
+	   		$this->nazwa=$nazwa;
+	   		$this->ilosc=$ilosc;
+	   		$this->cena=$cena;
+	   		$this->numer_seryjny=$numer_seryjny;
+	   		$this->data=$data;
+	   		$this->id_zamowienia=$id_zamowienia;
+	   		$this->adres_dostawy=$adres_dostawy;
+	   	}
+
+		public function getIdProduktu()
+	   	{
+	     	return $this->id_produktu;             
+	   	}  
+	   	public function getNazwa()
+	   	{
+	     	return $this->nazwa;             
+	   	}  
+	   	public function getIlosc()
+	   	{
+	     	return $this->ilosc;             
+	   	} 
+	   	public function getCena()
+	   	{
+	     	return $this->cena;             
+	   	} 
+	   	public function getNumerSeryjny()
+	   	{
+	     	return $this->numer_seryjny;             
+	   	} 
+	   	public function getData()
+	   	{
+	     	return $this->data;             
+	   	} 
+	   	public function getIdZamowienia()
+	   	{
+	     	return $this->id_zamowienia;             
+	   	} 
+	   	public function getAdresDostawy()
+	   	{
+	     	return $this->adres_dostawy;             
+	   	} 
+
+
+	}
+
 	class Kategoria{
 		private $id;
 		private $nazwa;

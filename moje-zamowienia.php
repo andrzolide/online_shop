@@ -10,39 +10,74 @@
 
   //include klas.
 
-
   //zmienne globalne
   $zamowienia=array();
 
+  $produkty_zamowien=array();
+
   //funkcje i klasy lokalne.
+/*
+
+SELECT produkty.id as 'produkt_id', produkty.cena, pr_bez_nr_seryjnego_zamowienia.ilosc ,  zamowienia.id as 'zamowienie_id', id_klienta,data,adres_dostawy, nazwa FROM zamowienia
+LEFT JOIN pr_bez_nr_seryjnego_zamowienia on zamowienia.id=pr_bez_nr_seryjnego_zamowienia.id_zamowienia
+JOIN produkty on pr_bez_nr_seryjnego_zamowienia.id_produktu=produkty.id
 
 
-  //kod
 
-  $zapytanie= "";
+SELECT produkty.id as 'produkt_id', produkty.cena, zamowienia.id as 'zamowienie_id', id_klienta,data,adres_dostawy, nr_seryjny, nazwa FROM zamowienia 
+JOIN pr_nr_seryjny on pr_nr_seryjny.id_zamowienia = zamowienia.id
+JOIN produkty on pr_nr_seryjny.id_produktu=produkty.id
 
-  $zapytanie= "SELECT * FROM zamowienia";
+*/
+  //ZAMOWIENIA:
+  $uzytkownik=$_SESSION['id'];
+  
+  $zapytanie1= "";
+  $zapytanie1= "
+SELECT produkty.id as 'produkt_id', produkty.cena, pr_bez_nr_seryjnego_zamowienia.ilosc ,  zamowienia.id as 'zamowienie_id', id_klienta,data,adres_dostawy, nazwa FROM zamowienia
+LEFT JOIN pr_bez_nr_seryjnego_zamowienia on zamowienia.id=pr_bez_nr_seryjnego_zamowienia.id_zamowienia
+JOIN produkty on pr_bez_nr_seryjnego_zamowienia.id_produktu=produkty.id
+  WHERE id_klienta=$uzytkownik";
 
-  if($rezultat = @$polaczenie->query($zapytanie))
+  if($rezultat = @$polaczenie->query($zapytanie1))
   {
-
     if ($rezultat->num_rows > 0) {
-      //echo " ------------------ZAMOWIENIA--------------- </br>";
-
         while($row = $rezultat->fetch_assoc()) {
-          array_push($zamowienia, new Zamowienie($row["id"],$row["id_klienta"],$row["data"],$row["adres"]));
+          //array_push($zamowienia, new Zamowienie($row["id"],$row["id_klienta"],$row["data"],$row["adres_dostawy"]));
           //echo "NAZWA PRODUKTU: ". $row["id"] . " ID KATEGORII: " . $row["data"] . "</br>";
+          array_push($produkty_zamowien, new ProduktZamowienie($row["produkt_id"],$row["nazwa"],$row["ilosc"],$row["cena"],"",$row["data"],$row["zamowienie_id"],$row["adres_dostawy"]));
         }
     } else {
         echo "0 results";
     }
-
   }else{
     echo "Błąd przy wykonywaniu zapytania";
   }
 
 
-  
+  //PRODUKTY ZMAWOEN
+
+  $zapytanie2= "";
+  $zapytanie2= "SELECT produkty.id as 'produkt_id', produkty.cena, zamowienia.id as 'zamowienie_id', id_klienta,data,adres_dostawy, nr_seryjny, nazwa FROM zamowienia 
+JOIN pr_nr_seryjny on pr_nr_seryjny.id_zamowienia = zamowienia.id
+JOIN produkty on pr_nr_seryjny.id_produktu=produkty.id
+  WHERE id_klienta=$uzytkownik";
+
+  if($rezultat = @$polaczenie->query($zapytanie2))
+  {
+
+    if ($rezultat->num_rows > 0) {
+        while($row = $rezultat->fetch_assoc()) {
+          //array_push($zamowienia, new Zamowienie($row["id"],$row["id_klienta"],$row["data"],$row["adres_dostawy"]));
+          //echo "NAZWA PRODUKTU: ". $row["id"] . " ID KATEGORII: " . $row["data"] . "</br>";
+          array_push($produkty_zamowien, new ProduktZamowienie($row["produkt_id"],$row["nazwa"],1,$row["cena"],$row["nr_seryjny"],$row["data"],$row["zamowienie_id"],$row["adres_dostawy"]));
+        }
+    } else {
+        echo "0 results";
+    }
+  }else{
+    echo "Błąd przy wykonywaniu zapytania";
+  }
 
 ?>
 
@@ -64,28 +99,41 @@ include "header.php"
 <table class="table table-striped">
   <thead>
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">Nazwa </th>
-      <th scope="col">Data</th>
+      <th scope="col">Nazwa</th>
+      <th scope="col">Cena</th>
+      <th scope="col">Ilosc</th>
+      <th scope="col">Numer seryjny</th>
+      <th scope="col">Id zamowienia</th>
+      <th scope="col">Data zamowienia</th>
+      <th scope="col">Adres dostawy</th>
 	  <th scope="col">Zwrot</th>
 	  <th scope="col">Reklamacja</th>
     </tr>
   </thead>
   <tbody>
-    <?php   foreach ($zamowienia as $value) { ?>
+    <?php   foreach ($produkty_zamowien as $value) { ?>
     <tr>
-      <th scope="row"><?php echo $value->getId() ?></th>
-      <td>Procek</td>
+      <td><?php echo $value->getNazwa() ?></td>
+      <td><?php echo $value->getCena() ?></td>
+      <td><?php echo $value->getIlosc() ?></td>
+      <td><?php echo $value->getNumerSeryjny() ?></td>
+      <td><?php echo $value->getIdZamowienia() ?></td>
       <td><?php echo $value->getData() ?></td>
-      <td><button type="button"  onclick="location.href = 'http://localhost/sklep/zwrot.php';" class="btn btn-light btn-ms ">Zwróć produkt</button></td>
-	  <td><button type="button"  onclick="location.href = 'http://localhost/sklep/reklamacja.php';" class="btn btn-warning btn-ms ">Zgłoś reklamacje</button></td>
+      <td><?php echo $value->getAdresDostawy() ?></td>
+
+      <?php 
+      $id_zam=$value->getIdZamowienia();
+      $id_prod_bez_nr=$value->getIdProduktu();
+      $nr_ser=$value->getNumerSeryjny();
+      $nazwa_prod=$value->getNazwa();
+      $string_pom="id_zamowienia=".$id_zam."&id_prod_bez_nr_ser=".$id_prod_bez_nr."&nr_ser=".$nr_ser."&nazwa_prod=".$nazwa_prod;
+      echo $string_pom . "</br>";
+       ?>
+      <td><a href="zwrot.php?<?php echo $string_pom ?>"><button type="button" class="btn btn-light btn-ms ">Zwróć produkt</button></a></td>
+	   <td><a href="reklamacja.php?<?php echo $string_pom ?>"><button type="button" class="btn btn-warning btn-ms ">Zgłoś reklamacje</button></a></td>
     </tr>
     <?php } ?>
   </tbody>
 </table>
-	
-	
-
-
 </body>
 </html>
