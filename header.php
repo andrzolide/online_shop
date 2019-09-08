@@ -42,7 +42,23 @@
     </a>
     </div>
     <div class="col-lg">
-	<button type="button"  onclick="location.href = 'http:moje-zamowienia.php';" class="btn btn-primary btn-primary btn-lg">Moje zamówienia</button>
+	<button type="button"  onclick="location.href = 'moje-zamowienia.php';" class="btn btn-primary btn-primary btn-lg">Moje zamówienia</button>
     </div>
+
+<?php 
+    if(isset($_SESSION['funkcja'])){
+        if($_SESSION['funkcja']=='magazynier'){
+?>
+    <div class="col-lg">
+    <button type="button"  onclick="location.href = 'admin.php';" class="btn btn-primary btn-danger btn-lg">Panel administratora</button>
+    </div>
+<?php  
+        }
+    }
+?>
+
+
+
+
   </div>
 </div>

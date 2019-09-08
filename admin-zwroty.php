@@ -1,3 +1,63 @@
+
+<?php 
+include "includes/czy-admin.php";
+
+require_once "classes-and-functions.php";
+/*
+SELECT zwroty.id , produkty.id as 'id_produktu', pr_nr_seryjny.nr_seryjny, zwroty.id_zamowienia, id_produktu_bez_seryjnego, zwroty.nr_seryjny, powod,login, nazwa FROM zwroty JOIN zamowienia on zamowienia.id = zwroty.id_zamowienia 
+JOIN klienci on klienci.id=zamowienia.id_klienta
+LEFT JOIN pr_nr_seryjny on pr_nr_seryjny.nr_seryjny= zwroty.nr_seryjny
+LEFT JOIN produkty on produkty.id= id_produktu_bez_seryjnego OR produkty.id=pr_nr_seryjny.id_produktu
+  WHERE 1
+*/
+
+  require_once "connect.php";
+
+  $polaczenie = @new mysqli($host, $db_user, $db_password, $db_name);
+
+  $zwroty=array();
+
+  $zapytanie="SELECT zwroty.id , produkty.id as 'id_produktu', pr_nr_seryjny.nr_seryjny, zwroty.id_zamowienia, id_produktu_bez_seryjnego, zwroty.nr_seryjny, powod,login, nazwa FROM zwroty JOIN zamowienia on zamowienia.id = zwroty.id_zamowienia 
+JOIN klienci on klienci.id=zamowienia.id_klienta
+LEFT JOIN pr_nr_seryjny on pr_nr_seryjny.nr_seryjny= zwroty.nr_seryjny
+LEFT JOIN produkty on produkty.id= id_produktu_bez_seryjnego OR produkty.id=pr_nr_seryjny.id_produktu
+  WHERE 1
+";
+  
+  if ($polaczenie->connect_errno!=0)
+  {
+    echo "Error: ".$polaczenie->connect_errno;
+  }
+  else
+  {
+  
+    if($rezultat = @$polaczenie->query($zapytanie))
+    {
+
+      if ($rezultat->num_rows > 0) {
+          while($row = $rezultat->fetch_assoc()) {
+            if(isset($row['nr_seryjny'])){
+
+            }else{
+
+            }
+            array_push($zwroty, 
+              new Zwrot($row["id"],$row["login"],$row["id_zamowienia"],$row["nazwa"],$row["powod"],$row["id_produktu"],$row["nr_seryjny"]));
+          }
+
+      } else {
+          echo "0 results";
+      }
+      
+    }
+    else{
+      echo "Błąd przy wykonywaniu zapytania";
+    }
+  }
+
+
+ ?>
+
 <!DOCTYPE HTML>
 <html lang="pl">
 <head>
@@ -17,14 +77,32 @@ include "header.php"
   <thead>
     <tr>
       <th scope="col">#</th>
-      <th scope="col">Zwroty</th>
+      <th scope="col">Login</th>
+      <th scope="col">Id zamówienia</th>
+      <th scope="col">Nazwa</th>
+      <th scope="col">Powód</th>
+      <th scope="col">Edycja</th>
+      <th scope="col">Edycja</th>
+      <th scope="col">Edycja</th>
     </tr>
   </thead>
   <tbody>
+    <?php foreach ($zwroty as  $value) { ?>
+    <?php 
+    $params="";
+
+     ?>
     <tr>
-      <th scope="row">1</th>
-	  <td><a href= 'http://localhost/sklep/admin-zwrot.php'>Zwrot 1</a></td>
+      <th scope="row"><?php echo $value->getId() ?></th>
+	   <td><?php echo $value->getLogin() ?></td>
+     <td><?php echo $value->getZamowienie() ?></td>
+     <td><?php echo $value->getProdukt() ?></td>
+     <td><?php echo $value->getOpis() ?></td>
+     <td><a href="admin-zwrot.php?<?php echo $params ?>">ZOBACZ</a></td>
+     <td><?php echo $value->getIdProduktu() ?></td>
+     <td><?php echo $value->getNrSeryjny() ?></td>
     </tr>
+  <?php } ?>
   </tbody>
 </table>
  

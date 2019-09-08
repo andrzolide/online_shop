@@ -106,8 +106,8 @@ include "header.php"
       <th scope="col">Id zamowienia</th>
       <th scope="col">Data zamowienia</th>
       <th scope="col">Adres dostawy</th>
-	  <th scope="col">Zwrot</th>
-	  <th scope="col">Reklamacja</th>
+    <th scope="col">Zwrot</th>
+    <th scope="col">Reklamacja</th>
     </tr>
   </thead>
   <tbody>
@@ -130,7 +130,7 @@ include "header.php"
       echo $string_pom . "</br>";
        ?>
       <td><a href="zwrot.php?<?php echo $string_pom ?>"><button type="button" class="btn btn-light btn-ms ">Zwróć produkt</button></a></td>
-	   <td><a href="reklamacja.php?<?php echo $string_pom ?>"><button type="button" class="btn btn-warning btn-ms ">Zgłoś reklamacje</button></a></td>
+     <td><a href="reklamacja.php?<?php echo $string_pom ?>"><button type="button" class="btn btn-warning btn-ms ">Zgłoś reklamacje</button></a></td>
     </tr>
     <?php } ?>
   </tbody>

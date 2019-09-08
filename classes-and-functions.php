@@ -155,25 +155,27 @@
 
 	class Zamowienie{
 		private $id;
-		private $id_klienta;
+		private $login;
 		private $data;
 		private $adres;
+		private $status;
 
-		public function __construct($id,$id_klienta,$data,$adres)
+		public function __construct($id,$login,$data,$adres,$status)
 	   	{
 	   		$this->id = $id;
-	      	$this->id_klienta = $id_klienta;
+	      	$this->login = $login;
 	      	$this->data = $data;
 	      	$this->adres = $adres;
+	      	$this->status = $status;
 	   	}
 
 		public function getId()
 	   	{
 	     	return $this->id;             
 	   	}  
-	   	public function getIdKlienta()
+	   	public function getLogin()
 	   	{
-	     	return $this->id_klienta;             
+	     	return $this->login;             
 	   	}  
 	   	public function getData()
 	   	{
@@ -183,6 +185,60 @@
 	   	{
 	     	return $this->adres;             
 	   	}  
+	   	public function getStatus()
+	   	{
+	     	return $this->status;             
+	   	} 
+	}
+
+	class Zwrot{
+		private $id;
+		private $login;
+		private $zamowienie;
+		private $produkt;
+		private $opis;
+		private $id_produktu;
+		private $nr_seryjny;
+
+		public function __construct($id,$login,$zamowienie,$produkt,$opis,$id_produktu,$nr_seryjny)
+	   	{
+	   		$this->id = $id;
+	      	$this->login = $login;
+	      	$this->zamowienie = $zamowienie;
+	      	$this->produkt = $produkt;
+	      	$this->opis = $opis;
+	      	$this->id_produktu = $id_produktu;
+	      	$this->nr_seryjny = $nr_seryjny;
+	   	}
+
+		public function getId()
+	   	{
+	     	return $this->id;             
+	   	}  
+	   	public function getLogin()
+	   	{
+	     	return $this->login;             
+	   	}  
+	   	public function getZamowienie()
+	   	{
+	     	return $this->zamowienie;             
+	   	}  
+	   	public function getProdukt()
+	   	{
+	     	return $this->produkt;             
+	   	}  
+	   	public function getOpis()
+	   	{
+	     	return $this->opis;             
+	   	} 
+	   	public function getIdProduktu()
+	   	{
+	     	return $this->id_produktu;             
+	   	} 
+	   	public function getNrSeryjny()
+	   	{
+	     	return $this->nr_seryjny;             
+	   	} 
 	}
 
 ?>

@@ -1,3 +1,59 @@
+<?php 
+
+include "includes/czy-admin.php";
+
+require_once "classes-and-functions.php";
+/*
+SELECT zamowienia.id, id_klienta,data,adres_dostawy,status,login FROM zamowienia
+JOIN klienci on zamowienia.id_klienta = klienci.id
+WHERE 1
+
+*/
+
+  require_once "connect.php";
+
+  $polaczenie = @new mysqli($host, $db_user, $db_password, $db_name);
+
+  $zamowienia=array();
+
+  $zapytanie="SELECT zamowienia.id, id_klienta,data,adres_dostawy,status,login FROM zamowienia
+JOIN klienci on zamowienia.id_klienta = klienci.id
+WHERE 1";
+  
+  if ($polaczenie->connect_errno!=0)
+  {
+    echo "Error: ".$polaczenie->connect_errno;
+  }
+  else
+  {
+    if($rezultat = @$polaczenie->query($zapytanie))
+    {
+
+      if ($rezultat->num_rows > 0) {
+          while($row = $rezultat->fetch_assoc()) {
+            array_push($zamowienia, new Zamowienie($row["id"],$row["login"],$row["data"],$row["adres_dostawy"],$row["status"]));
+          }
+          // foreach ($kategorie as $kat){
+          //  echo $kat->getNazwa() . " ---- id kategorii: " . $kat->getId();
+          //  echo "</br>";
+          //  foreach ($kat->podkategorie as $podkat) {
+          //    echo "-----".$podkat->getNazwa() . " ---- id kategorii: " . $podkat->getId();
+          //    echo "</br>";
+          //  }
+          // }
+
+      } else {
+          echo "0 results";
+      }
+      
+    }
+    else{
+      echo "Błąd przy wykonywaniu zapytania";
+    }
+  }
+?>
+
+
 <!DOCTYPE HTML>
 <html lang="pl">
 <head>
@@ -14,9 +70,6 @@
 
 <body>
 <body>
-<?php
-include "header.php"
-?>
 
 <center><h2>Zamówienia</h2></center>
 
@@ -37,17 +90,27 @@ include "header.php"
   <thead>
     <tr>
       <th scope="col">#</th>
-      <th scope="col">Zamówienie</th>
+      <th scope="col">Login użytkownika</th>
+      <th scope="col">Data</th>
+      <th scope="col">Adres dostawy</th>
       <th scope="col">Status</th>
+      <th scope="col">Edytuj</th>
     </tr>
   </thead>
   <tbody>
+    
+    <?php foreach ($zamowienia as $value) { ?>
+      
     <tr>
-      <th scope="row">1</th>
-	  <td><a href= 'http://localhost/sklep/admin-zamowienie.php'>Zamówienie 1</a></td>
-      <td>Status</td>
-
+      <th scope="row"><?php echo $value->getId() ?></th>
+	   <td><?php echo $value->getLogin() ?></td>
+      <td><?php echo $value->getData() ?></td>
+      <td><?php echo $value->getAdres() ?></td>
+      <td><?php echo $value->getStatus() ?></td>
+      <td><a href= 'admin-zamowienie.php?id=<?php echo $value->getId() ?>'>EDYTUJ</a></td>
     </tr>
+    
+  <?php } ?>
   </tbody>
 </table>
  
