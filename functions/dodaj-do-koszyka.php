@@ -36,6 +36,12 @@
 	if(isset($_GET['kategoria'])) {
 		$kat=  "&kategoria=".$_GET['kategoria']; 
 	}
+	if(isset($_GET['target'])){
+		if($_GET['target']=='koszyk'){
+			header('Location: ../koszyk.php?info=Pomyślnie dodano do koszyka'. $kat);
+			exit();
+		}
+	}
 	header('Location: ../sklep.php?info=Pomyślnie dodano do koszyka'. $kat);
 
 ?>

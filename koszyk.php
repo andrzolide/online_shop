@@ -1,75 +1,10 @@
 <?php
 
-	session_start();
-	
-	if (!(isset($_SESSION['zalogowany'])) || ($_SESSION['zalogowany']==false))
-	{
-		header('Location: sklep.php');
-		exit();
-	}
+  include "includes/czy-zalogowany.php";
 
-	require_once "classes-and-functions.php";
+  require_once "classes-and-functions.php";
 
-	function utworz_string_z_produktami($produkty){
-		$string="";
-		foreach ($produkty as $id){
-			if($string != "") { $string = $string . ", "; }
-    		$string = $string . $id;
-	    }
-	    echo "string pomocniczy: " . $string . "</br>";
-
-		return $string;
-	}
-
-	require_once "connect.php";
-
-	$polaczenie = @new mysqli($host, $db_user, $db_password, $db_name);
-
-
-	//----------------------------------------------------
-
-	$produkty=array();
-	
-	if ($polaczenie->connect_errno!=0)
-	{
-		echo "Error: ".$polaczenie->connect_errno;
-	}
-	else{
-		echo "PRODUKTY: </br>";
-
-		$zapytanie="";
-
-		$string_pomocniczy="";
-
-		if(isset($_SESSION['chart'])){
-			$string_pomocniczy = utworz_string_z_produktami($_SESSION['chart']);
-		
-			$zapytanie="SELECT * FROM produkty WHERE id IN(" . $string_pomocniczy . ");";
-
-			if ($rezultat = @$polaczenie->query($zapytanie)){
-				if ($rezultat->num_rows > 0) {
-				    while($row = $rezultat->fetch_assoc()) {
-				    	$count = count(array_keys($_SESSION['chart'], $row['id']));
-				    	array_push($produkty, new ProduktKoszyk(new Produkt($row['id'],$row['cena'],$row['nazwa'],$row['id_kategorii']),$count));
-				    }
-
-				} else {
-				    echo "0 results";
-				}
-			}
-
-
-		}else{
-			echo "Brak produktów w koszyku";
-		}
-
-	}
-
-  //     foreach ($produkty as  $value) {
-  //   echo "id: ". $value->produkt->getNazwa() . " ilosc: ". $value->getIlosc() ;
-  //   echo ' <a href = "functions/usun-z-koszyka.php?id_produktu=' .$value->produkt->getId(). '">usun</a> </br>';
-  // }
-
+  require_once "pobierz-dane-do-koszyka.php";
 
 ?>
 
@@ -94,6 +29,9 @@
 <?php
 include "header.php"
 ?>
+<?php
+include "info-blad.php"
+?>
 
 
 
@@ -104,6 +42,7 @@ include "header.php"
       <th scope="col">Nazwa</th>
       <th scope="col">Cena</th>
       <th scope="col">Ilość</th>
+      <th scope="col">Ilość dostępnych</th>
 	  <th scope="col">Usuń</th>
 
     </tr>
@@ -113,31 +52,44 @@ include "header.php"
 
 
 
-    <?php   foreach ($produkty as  $value) { ?>
+    <?php   foreach ($produkty_do_wyswietlenia as  $value) { ?>
     <tr>
-      <th scope="row">1</th>
+      <th scope="row"><?php echo $value->produkt->getId() ?></th>
       <td><?php echo $value->produkt->getNazwa() ?></td>
       <td><?php echo $value->produkt->getCena() ?></td>
       <td>
-
+        <a style="color:red;" href="functions/usun-z-koszyka.php?id_produktu=<?php echo $value->produkt->getId()."&cena=".$value->produkt->getCena()."&target=koszyk" ?>">usun</a>
+        <a style="color:green;" href="functions/dodaj-do-koszyka.php?id_produktu=<?php echo $value->produkt->getId()."&cena=".$value->produkt->getCena()."&target=koszyk" ?>">dodaj</a>
+        
 	  <div class="center">
       </p><div class="input-group">
-          <span class="input-group-btn">
-              <button type="button" class="btn btn-danger btn-number btn"  data-type="minus" data-field="quant[2]">
-                <span class="glyphicon glyphicon-minus"></span>
-              </button>
+          <span >
+              <a href="functions/dodaj-do-koszyka.php?id_produktu=<?php echo $value->produkt->getId()."&cena=".$value->produkt->getCena() ?>"><button type="button" class="btn btn-danger btn-number btn"  ></button></a>
           </span>
-          <input type="text" name="quant[2]" class="form-control input-number" value="1" min="1" max="100">
+   
+
+        <input type="text" name="quant[2]" class="form-control input-number" value=" <?php echo $value->getIlosc() ?>" min="1" max="100">
+   
+          
           <span class="input-group-btn">
-              <button type="button" class="btn btn-success btn-number btn" data-type="plus" data-field="quant[2]">
-                  <span class="glyphicon glyphicon-plus"></span>
-              </button>
+              <button type="button" class="btn btn-success btn-number btn" data-type="plus" ></button>
           </span>
       </div>
 	<p></p>
 </div>
 	  
 	  </td>
+    <td>
+      
+      <?php 
+      if(empty($value->getIloscNaMagazynie())){
+        echo $produkty_z_numerami_seryjnymi_ilosc[$value->produkt->getId()];
+      } else{
+        echo $value->getIloscNaMagazynie();
+      }
+      ?>
+
+    </td>
 	  <td><button   type="button" class="btn btn-secondary"> <?php 
     echo ' <a href = "functions/usun-z-koszyka.php?id_produktu=' .$value->produkt->getId(). "&cena=". $value->produkt->getCena() . '">usun</a>';
      ?> </button></td>
@@ -168,10 +120,10 @@ include "header.php"
 <div class="container">
   <div class="row">
     <div class="col-sm">
-	<button type="button"  onclick="location.href = 'http://localhost/sklep/sklep.php';" class="btn btn-secondary ">Powrót</button>
+	<button type="button"  onclick="location.href = 'sklep.php';" class="btn btn-secondary ">Powrót</button>
     </div>
     <div class="col-sm">
-	<button type="button" onclick="location.href = 'http://localhost/sklep/zamow.php';" class="btn btn-success">Złóż zamówienie</button>
+	<button type="button" onclick="location.href = 'zamow.php';" class="btn btn-success">Złóż zamówienie</button>
     </div>
     
   </div>

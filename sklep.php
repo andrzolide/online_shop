@@ -18,7 +18,7 @@
 		if ($rezultat->num_rows > 0) {
 			//echo " ------------------KATEGORIE --------------- </br>";
 		    while($row = $rezultat->fetch_assoc()) {
-		    	if($row["id_ojca"] == 1){
+		    	if(empty($row["id_ojca"])){
 		    		$kategorie[$row["id"]] = new Kategoria($row["id"],$row["nazwa"],$row["id_ojca"]);
 		    	}
 		    	else{
@@ -106,7 +106,7 @@
 		if ($rezultat->num_rows > 0) {
 		    while($row = $rezultat->fetch_assoc()) {
 		    	array_push($produkty, new Produkt($row["id"],$row["cena"],$row["nazwa"],$row["id_kategorii"]));
-		    	//echo "NAZWA PRODUKTU: ". $row["nazwa"] . " ID KATEGORII: " . $row["id_kategorii"] . "</br>";
+		    	echo "NAZWA PRODUKTU: ". $row["id"] . " ID KATEGORII: " . $row["nazwa"] . "</br>";
 		    }
 
 		} else {
@@ -149,7 +149,7 @@ if($sort == "nazwa"){
 
 
 
-echo "<p>Witaj ".$_SESSION['user'].'! [ <a href="logout.php">Wyloguj się!</a> ]</p>';
+echo "<p>Witaj ".$_SESSION['login'].'! [ <a href="logout.php">Wyloguj się!</a> ]</p>';
 
 	
 ?>

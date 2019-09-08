@@ -4,66 +4,7 @@
 
   require_once "classes-and-functions.php";
 
-  function utworz_string_z_produktami($produkty){
-    $string="";
-    foreach ($produkty as $id){
-      if($string != "") { $string = $string . ", "; }
-        $string = $string . $id;
-      }
-      echo "string pomocniczy: " . $string . "</br>";
-
-    return $string;
-  }
-
-  require_once "connect.php";
-
-  $polaczenie = @new mysqli($host, $db_user, $db_password, $db_name);
-
-
-  //----------------------------------------------------
-
-  $produkty=array();
-  
-  if ($polaczenie->connect_errno!=0)
-  {
-    echo "Error: ".$polaczenie->connect_errno;
-  }
-  else{
-    echo "PRODUKTY: </br>";
-
-    $zapytanie="";
-
-    $string_pomocniczy="";
-
-    if(isset($_SESSION['chart'])){
-      $string_pomocniczy = utworz_string_z_produktami($_SESSION['chart']);
-    
-      $zapytanie="SELECT * FROM produkty WHERE id IN(" . $string_pomocniczy . ");";
-
-      if ($rezultat = @$polaczenie->query($zapytanie)){
-        if ($rezultat->num_rows > 0) {
-            while($row = $rezultat->fetch_assoc()) {
-              $count = count(array_keys($_SESSION['chart'], $row['id']));
-              array_push($produkty, new ProduktKoszyk(new Produkt($row['id'],$row['cena'],$row['nazwa'],$row['id_kategorii']),$count));
-            }
-
-        } else {
-            echo "0 results";
-        }
-      }
-
-
-    }else{
-      echo "Brak produktów w koszyku";
-    }
-
-  }
-
-  //     foreach ($produkty as  $value) {
-  //   echo "id: ". $value->produkt->getNazwa() . " ilosc: ". $value->getIlosc() ;
-  //   echo ' <a href = "functions/usun-z-koszyka.php?id_produktu=' .$value->produkt->getId(). '">usun</a> </br>';
-  // }
-
+  require_once "pobierz-dane-do-koszyka.php";
 
 ?>
 
@@ -89,35 +30,29 @@ include "header.php"
  <div class="form-group row">
     <label  class="col-sm-2 col-form-label">Imię</label>
     <div class="col-sm-3">
-      <input  class="form-control" name="adres" placeholder="Podaj imię" value="<?php echo $_SESSION['user']; ?>">
+      <input  class="form-control" name="adres" placeholder="Podaj imię" value="">
     </div>
 	
-	<label for="inputPassword" class="col-sm-2 col-form-label">Ulica</label>
+	<label for="inputPassword" class="col-sm-2 col-form-label">Adres dostawy</label>
     <div class="col-sm-3">
-      <input class="form-control" name="street" placeholder="Podaj ulice" value="street">
+      <input class="form-control" name="adres" placeholder="Podaj ulice" value="<?php echo $_SESSION['domyslny_adres'] ?>">
     </div>
   </div>
 
   <div class="form-group row">
     <label class="col-sm-2 col-form-label">Nazwisko</label>
     <div class="col-sm-3">
-      <input  class="form-control"  placeholder="<?php echo $_SESSION['user']; ?>">
+      <input  class="form-control"  placeholder="Podaj nazwisko">
     </div>
-	<label for="inputPassword" class="col-sm-2 col-form-label">Kod pocztowy</label>
-    <div class="col-sm-3">
-      <input class="form-control" name="postalCode" placeholder="Podaj kod pocztowy" value="postalCode">
-    </div>
+
   </div>
 
   <div class="form-group row">
     <label for="inputPassword" class="col-sm-2 col-form-label">Email</label>
     <div class="col-sm-3">
-      <input class="form-control" name="email" placeholder="Podaj email"value="<?php echo $_SESSION['email']; ?>">
+      <input class="form-control" name="email" placeholder="Podaj email"value="">
     </div>
-	<label  class="col-sm-2 col-form-label">Miasto</label>
-    <div class="col-sm-3">
-      <input  class="form-control" name="city" placeholder="Podaj miasto" value="city">
-    </div>
+
   </div>
 <center>  <h2>Podsumowanie zakupów</h> </center>
 
@@ -131,7 +66,7 @@ include "header.php"
     </tr>
   </thead>
   <tbody>
-    <?php foreach ($produkty as  $value) { ?>
+    <?php foreach ($produkty_do_wyswietlenia as  $value) { ?>
     <tr>
       <th scope="row"><?php echo $value->produkt->getId() ?></th>
       <td><?php echo $value->produkt->getNazwa() ?></td>

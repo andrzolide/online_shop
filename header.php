@@ -1,13 +1,13 @@
 <div class="container">
   <div class="row">
     <div class="col-ms">
-	<button type="button" onclick="location.href = 'http://localhost/sklep/admin.php';"  class="btn btn-primary btn-primary btn-lg">Panel administratora</button>
+	<button type="button" onclick="location.href = 'admin.php';"  class="btn btn-primary btn-primary btn-lg">Panel administratora</button>
     </div>
     <div class="col-lg">
-	<button type="button" onclick="location.href = 'http://localhost/sklep/index.php';" class="btn btn-primary btn-primary btn-lg">Logo</button>
+	<button type="button" onclick="location.href = 'index.php';" class="btn btn-primary btn-primary btn-lg">Logo</button>
     </div>
     <div class="col-lg">
-	<button type="button"  onclick="location.href = 'http://localhost/sklep/koszyk.php';" class="btn btn-primary btn-primary btn-lg ">Koszyk </br> ilość przedmiotów : <?php 
+	<button type="button"  onclick="location.href = 'koszyk.php';" class="btn btn-primary btn-primary btn-lg ">Koszyk </br> ilość przedmiotów : <?php 
     if (isset($_SESSION['chart-num']))
     {
         echo $_SESSION['chart-num'];
@@ -42,7 +42,7 @@
     </a>
     </div>
     <div class="col-lg">
-	<button type="button"  onclick="location.href = 'http://localhost/sklep/moje-zamowienia.php';" class="btn btn-primary btn-primary btn-lg">Moje zamówienia</button>
+	<button type="button"  onclick="location.href = 'http:moje-zamowienia.php';" class="btn btn-primary btn-primary btn-lg">Moje zamówienia</button>
     </div>
   </div>
 </div>

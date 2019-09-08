@@ -27,7 +27,7 @@
 	
 
 		if ($rezultat = @$polaczenie->query(
-		sprintf("SELECT * FROM uzytkownicy WHERE user='%s' AND pass='%s'",
+		sprintf("SELECT * FROM klienci WHERE login='%s' AND haslo='%s'",
 		mysqli_real_escape_string($polaczenie,$login),
 		mysqli_real_escape_string($polaczenie,$haslo))))
 		{
@@ -38,12 +38,12 @@
 				
 				$wiersz = $rezultat->fetch_assoc();
 				$_SESSION['id'] = $wiersz['id'];
-				$_SESSION['user'] = $wiersz['user'];
-				$_SESSION['drewno'] = $wiersz['drewno'];
-				$_SESSION['kamien'] = $wiersz['kamien'];
-				$_SESSION['zboze'] = $wiersz['zboze'];
-				$_SESSION['email'] = $wiersz['email'];
-				$_SESSION['dnipremium'] = $wiersz['dnipremium'];
+				$_SESSION['login'] = $wiersz['login'];
+				$_SESSION['funkcja'] = $wiersz['funkcja'];
+				$_SESSION['domyslny_adres'] = $wiersz['domyslny_adres'];
+
+
+
 				
 				unset($_SESSION['blad']);
 				$rezultat->free_result();

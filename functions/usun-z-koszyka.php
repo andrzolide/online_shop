@@ -28,6 +28,12 @@
 		if(isset($_SESSION["chart-num"])){
 			$_SESSION['chart-num']=count($_SESSION['chart']);
 		}
+		if(isset($_GET['target'])){
+			if($_GET['target']=='koszyk'){
+				header('Location: ../koszyk.php?info=Pomyślnie usunięto z koszyka'. $kat);
+				exit();
+		}
+	}
 		header('Location: ../koszyk.php?info=Pomyślnie usunieto z koszyka');
 	}else{
 		header('Location: ../koszyk.php?blad=Nie udało się usunąć produktu z koszyka');

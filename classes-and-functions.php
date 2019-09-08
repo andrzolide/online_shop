@@ -20,7 +20,7 @@
 	   	}  
 		public function getCena()
 	   	{
-	     	return $this->id;             
+	     	return $this->cena;             
 	   	}  
 	   	public function getNazwa()
 	   	{
@@ -35,16 +35,36 @@
 	class ProduktKoszyk{
 		public $produkt;
 		private $ilosc;
+		private $ilosc_na_magazynie;
+		private $numer_seryjny;
 
-		public function __construct($produkt, $ilosc)
+		public function __construct($produkt, $ilosc, $ilosc_na_magazynie, $numer_seryjny)
 	   	{
 	   		$this->produkt=$produkt;
 	   		$this->ilosc=$ilosc;
+	   		$this->ilosc_na_magazynie=$ilosc_na_magazynie;
+	   		$this->numer_seryjny=$numer_seryjny;
 	   	}
 
 		public function getIlosc()
 	   	{
 	     	return $this->ilosc;             
+	   	}  
+	   	public function getNumerSeryjny()
+	   	{
+	     	return $this->numer_seryjny;             
+	   	}  
+	   	public function getIloscNaMagazynie()
+	   	{
+	     	return $this->ilosc_na_magazynie;             
+	   	}   
+	   	public function setNumerSeryjny($numer_seryjny)
+	   	{
+	     	$this->numer_seryjny=$numer_seryjny;           
+	   	}  
+	   	public function setIloscNaMagazynie($ilosc_na_magazynie)
+	   	{
+	     	$this->ilosc_na_magazynie=$ilosc_na_magazynie;           
 	   	}  
 	}
 
@@ -72,7 +92,7 @@
 	   	public function getIdOjca()
 	   	{
 	     	return $this->id_ojca;             
-	   	}  
+	   	} 
 	}
 
 	class Zamowienie{
