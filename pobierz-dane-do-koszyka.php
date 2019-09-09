@@ -37,7 +37,7 @@
     if(isset($_SESSION['chart'])){
       $string_pomocniczy = utworz_string_z_produktami($_SESSION['chart']);
     
-      $zapytanie="SELECT id, nazwa, cena, id_kategorii, ilosc_w_magazynie , nr_seryjny
+      $zapytanie="SELECT id, nazwa, cena, id_kategorii, ilosc_w_magazynie , nr_seryjny, id_zamowienia
       FROM produkty
       LEFT JOIN pr_bez_nr_seryjnego on produkty.id = pr_bez_nr_seryjnego.id_produktu 
       LEFT JOIN pr_nr_seryjny on produkty.id = pr_nr_seryjny.id_produktu
@@ -47,7 +47,8 @@
             while($row = $rezultat->fetch_assoc()) {
               $count = count(array_keys($_SESSION['chart'], $row['id']));
               array_push($produkty, new ProduktKoszyk(new Produkt($row['id'],$row['cena'],$row['nazwa'],$row['id_kategorii']),
-                $count,$row['ilosc_w_magazynie'],$row['nr_seryjny']));
+                $count,$row['ilosc_w_magazynie'],$row['nr_seryjny'],$row['id_zamowienia']));
+
             }
 
         } else {
@@ -66,7 +67,7 @@
 
   foreach ($produkty as $key => $value) {
     //echo " selloo". $value->numer_seryjny;
-    if(!empty($value->getNumerSeryjny())){
+    if(!empty($value->getNumerSeryjny())&&empty($value->getIdZamowienia())){
 
       if(isset($produkty_z_numerami_seryjnymi_ilosc[$value->produkt->getId()])){
         $produkty_z_numerami_seryjnymi_ilosc[$value->produkt->getId()]++;

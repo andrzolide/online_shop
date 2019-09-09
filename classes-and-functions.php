@@ -37,13 +37,15 @@
 		private $ilosc;
 		private $ilosc_na_magazynie;
 		private $numer_seryjny;
+		private $id_zamowienia;
 
-		public function __construct($produkt, $ilosc, $ilosc_na_magazynie, $numer_seryjny)
+		public function __construct($produkt, $ilosc, $ilosc_na_magazynie, $numer_seryjny, $id_zamowienia)
 	   	{
 	   		$this->produkt=$produkt;
 	   		$this->ilosc=$ilosc;
 	   		$this->ilosc_na_magazynie=$ilosc_na_magazynie;
 	   		$this->numer_seryjny=$numer_seryjny;
+	   		$this->id_zamowienia=$id_zamowienia;
 	   	}
 
 		public function getIlosc()
@@ -66,6 +68,10 @@
 	   	{
 	     	$this->ilosc_na_magazynie=$ilosc_na_magazynie;           
 	   	}  
+	   	public function getIdZamowienia()
+	   	{
+	     	return $this->id_zamowienia;         
+	   	} 
 	}
 
 		class ProduktZamowienie{
@@ -194,13 +200,18 @@
 	class Zwrot{
 		private $id;
 		private $login;
+		private $imie;
+		private $nazwisko;
+		private $email;
 		private $zamowienie;
 		private $produkt;
 		private $opis;
 		private $id_produktu;
 		private $nr_seryjny;
+		private $adres_dostawy;
+		private $status;
 
-		public function __construct($id,$login,$zamowienie,$produkt,$opis,$id_produktu,$nr_seryjny)
+		public function __construct($id,$login,$zamowienie,$produkt,$opis,$id_produktu,$nr_seryjny,$imie,$nazwisko,$email,$adres_dostawy,$status)
 	   	{
 	   		$this->id = $id;
 	      	$this->login = $login;
@@ -209,6 +220,11 @@
 	      	$this->opis = $opis;
 	      	$this->id_produktu = $id_produktu;
 	      	$this->nr_seryjny = $nr_seryjny;
+	      	$this->imie = $imie;
+	      	$this->nazwisko = $nazwisko;
+	      	$this->email = $email;
+	      	$this->adres_dostawy = $adres_dostawy;
+	      	$this->status = $status;
 	   	}
 
 		public function getId()
@@ -238,6 +254,26 @@
 	   	public function getNrSeryjny()
 	   	{
 	     	return $this->nr_seryjny;             
+	   	} 
+	   	public function getImie()
+	   	{
+	     	return $this->imie;             
+	   	} 
+	   	public function getNazwisko()
+	   	{
+	     	return $this->nazwisko;             
+	   	} 
+	   	public function getEmail()
+	   	{
+	     	return $this->email;             
+	   	} 
+	   	public function getAdresDostawy()
+	   	{
+	     	return $this->adres_dostawy;             
+	   	} 
+	   	public function getStatus()
+	   	{
+	     	return $this->status;             
 	   	} 
 	}
 

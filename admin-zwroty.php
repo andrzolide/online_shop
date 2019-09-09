@@ -17,7 +17,7 @@ LEFT JOIN produkty on produkty.id= id_produktu_bez_seryjnego OR produkty.id=pr_n
 
   $zwroty=array();
 
-  $zapytanie="SELECT zwroty.id , produkty.id as 'id_produktu', pr_nr_seryjny.nr_seryjny, zwroty.id_zamowienia, id_produktu_bez_seryjnego, zwroty.nr_seryjny, powod,login, nazwa FROM zwroty JOIN zamowienia on zamowienia.id = zwroty.id_zamowienia 
+  $zapytanie="SELECT zwroty.id , produkty.id as 'id_produktu', pr_nr_seryjny.nr_seryjny, zwroty.id_zamowienia, id_produktu_bez_seryjnego, zwroty.nr_seryjny, powod,login, nazwa, imie ,nazwisko, email, adres_dostawy, zwroty.status FROM zwroty JOIN zamowienia on zamowienia.id = zwroty.id_zamowienia 
 JOIN klienci on klienci.id=zamowienia.id_klienta
 LEFT JOIN pr_nr_seryjny on pr_nr_seryjny.nr_seryjny= zwroty.nr_seryjny
 LEFT JOIN produkty on produkty.id= id_produktu_bez_seryjnego OR produkty.id=pr_nr_seryjny.id_produktu
@@ -42,7 +42,7 @@ LEFT JOIN produkty on produkty.id= id_produktu_bez_seryjnego OR produkty.id=pr_n
 
             }
             array_push($zwroty, 
-              new Zwrot($row["id"],$row["login"],$row["id_zamowienia"],$row["nazwa"],$row["powod"],$row["id_produktu"],$row["nr_seryjny"]));
+              new Zwrot($row["id"],$row["login"],$row["id_zamowienia"],$row["nazwa"],$row["powod"],$row["id_produktu"],$row["nr_seryjny"],$row["imie"],$row["nazwisko"],$row["email"],$row["adres_dostawy"],$row["status"]));
           }
 
       } else {
@@ -72,6 +72,11 @@ LEFT JOIN produkty on produkty.id= id_produktu_bez_seryjnego OR produkty.id=pr_n
 <?php
 include "header.php"
 ?>
+
+
+<?php
+include "info-blad.php"
+?>
 	
 	<table class="table table-striped">
   <thead>
@@ -80,36 +85,42 @@ include "header.php"
       <th scope="col">Login</th>
       <th scope="col">Id zamówienia</th>
       <th scope="col">Nazwa</th>
-      <th scope="col">Powód</th>
-      <th scope="col">Edycja</th>
-      <th scope="col">Edycja</th>
+      <th scope="col">Status</th>
       <th scope="col">Edycja</th>
     </tr>
   </thead>
   <tbody>
     <?php foreach ($zwroty as  $value) { ?>
-    <?php 
-    $params="";
 
-     ?>
-    <tr>
+<?php 
+$params="";
+
+$id=$value->getId();
+
+$params="id_zwrotu=".$id;
+echo $value->getStatus();
+ ?>
+    <tr <?php if($value->getStatus()=="uznany"){echo 'style = "background: green;"';} 
+              else if($value->getStatus()=="odrzucony"){echo 'style = "background: red;"';} 
+
+    ?>>
       <th scope="row"><?php echo $value->getId() ?></th>
 	   <td><?php echo $value->getLogin() ?></td>
      <td><?php echo $value->getZamowienie() ?></td>
      <td><?php echo $value->getProdukt() ?></td>
-     <td><?php echo $value->getOpis() ?></td>
+     <td><?php echo $value->getStatus() ?></td>
      <td><a href="admin-zwrot.php?<?php echo $params ?>">ZOBACZ</a></td>
-     <td><?php echo $value->getIdProduktu() ?></td>
-     <td><?php echo $value->getNrSeryjny() ?></td>
     </tr>
   <?php } ?>
   </tbody>
 </table>
  
+
+
 <div class="container">
   <div class="row">
     <div class="col-sm">
-	<button type="button"  onclick="location.href = 'http://localhost/sklep/admin.php';" class="btn btn-secondary ">Powrót</button>
+	<button type="button"  onclick="location.href = 'admin.php';" class="btn btn-secondary ">Powrót</button>
     </div>
    
   </div>

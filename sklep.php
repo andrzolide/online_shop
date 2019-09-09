@@ -84,18 +84,41 @@
 
 	//przygotuj zapytanie na podstawie parametrów z geta
 	$produkty = array();
-	$zapytanie = "SELECT * FROM produkty;";
+	if (isset($_GET['sort']))
+	{
+		$sort=$_GET['sort'];
+		$zapytanie = "SELECT * FROM produkty ORDER BY $sort ;";
+	}else{
+		$zapytanie = "SELECT * FROM produkty;";
+	}
+
+
 	$get_id_kategorii;
 	if (isset($_GET['kategoria']) && $_GET['kategoria'] != 1)
 	{
 		$get_id_kategorii=$_GET["kategoria"];
 		echo " szukam produktów dla kategorii: ". $get_id_kategorii . "</br>";
 		if(czy_to_podkategoria($kategorie, $get_id_kategorii)){
-			$zapytanie="SELECT * FROM produkty WHERE id_kategorii=". $get_id_kategorii .";";
+			if (isset($_GET['sort']))
+			{
+				$sort=$_GET['sort'];
+				$zapytanie="SELECT * FROM produkty WHERE id_kategorii=". $get_id_kategorii ." ORDER BY $sort;";
+			}else{
+				$zapytanie="SELECT * FROM produkty WHERE id_kategorii=". $get_id_kategorii .";";
+			}
+
 		}
 		else{
 			$string_pomocniczy=utworz_string_z_kategoriami($kategorie, $get_id_kategorii);
-			$zapytanie="SELECT * FROM produkty WHERE id_kategorii IN(" . $string_pomocniczy . ");";
+			if (isset($_GET['sort']))
+			{
+				$sort=$_GET['sort'];
+				$zapytanie="SELECT * FROM produkty WHERE id_kategorii IN(" . $string_pomocniczy . ") ORDER BY $sort;";
+				
+			}else{
+				$zapytanie="SELECT * FROM produkty WHERE id_kategorii IN(" . $string_pomocniczy . ");";
+			}
+			
 		}
 	}
 	
@@ -116,37 +139,6 @@
 	}else{
 		echo "Błąd przy wykonywaniu zapytania";
 	}
-
-//
-	// foreach ($produkty as $prod){
- //    	echo $prod->getNazwa() . " ---- id kategorii: " . $prod->getId();
- //    	echo "</br>";
- //    }
-	
-
-// SORTOWANIE PRODUKTOW-------------------
-$sort="none";
-if (isset($_GET['sort']))
-{
-	$sort=$_GET['sort'];
-}
-
-if($sort == "nazwa"){
-	function cmp($a, $b)
-	{
-	    return strcmp($a->getNazwa(), $b->getNazwa());
-	}
-
-	usort($produkty, "cmp");
-}else if($sort == "cena"){
-	function cmp($a, $b)
-	{
-	    return strcmp($a->getCena(), $b->getCena());
-	}
-
-	usort($produkty, "cmp");
-}
-
 
 
 echo "<p>Witaj ".$_SESSION['login'].'! [ <a href="logout.php">Wyloguj się!</a> ]</p>';
@@ -280,17 +272,13 @@ if(isset($_GET['kategoria'])) {
       <td><?php echo $prod->getNazwa(); ?></td>
       <td><?php echo $prod->getCena(); ?></td>
 
-      <td><button   type="button" class="btn btn-secondary"> <a href=" <?php echo "functions/dodaj-do-koszyka.php?id_produktu=". $prod->getId()."&cena=". $prod->getCena(). $kat_pom; ?> ">Dodaj do koszyka</a> </button></td>
+      <td><button    type="button" class="btn btn-secondary"> <a style="color:white;" href=" <?php echo "functions/dodaj-do-koszyka.php?id_produktu=". $prod->getId()."&cena=". $prod->getCena(). $kat_pom; ?> ">Dodaj do koszyka</a> </button></td>
     </tr>
     <?php } ?>
 
 
   </tbody>
 </table>
-	
-
-
-<!-- End -->
 
 
 </body>

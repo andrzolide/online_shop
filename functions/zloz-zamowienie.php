@@ -10,6 +10,8 @@
   require_once "../connect.php";
   $polaczenie = @new mysqli($host, $db_user, $db_password, $db_name);
 
+  
+  $message= "";
 
   $zapytanie= "";
 
@@ -21,9 +23,10 @@
   }
 
   if ($polaczenie->query($zapytanie) === TRUE) {
-    echo "New record created successfully". "<br>";
+    $message= "info=Pomyślnie dodano zamówienie";
   } else {
     echo "Error: " . $zapytanie . "<br>" . $polaczenie->error;
+    $message= "blad=Nie udało się dodać zamówienia";
   }
 
 
@@ -58,6 +61,7 @@
 
   $zapytanie2= "";
   $zapytanie3= "";
+  $zapytanie4= "";
 
   $id_zam=$polaczenie->insert_id;
   echo "id odatniego gowna!!!: ".$id_zam."</br>";
@@ -76,41 +80,33 @@
         $ilosc=$prod_to_zam->getIlosc();
         $zapytanie3.="INSERT INTO pr_bez_nr_seryjnego_zamowienia (id_produktu, ilosc, id_zamowienia)
             VALUES ('$id_prod', '$ilosc', '$id_zam');";
+        $nowa_ilosc=$prod_to_zam->getIloscNaMagazynie()-$prod_to_zam->getIlosc();
+        $zapytanie4.="UPDATE pr_bez_nr_seryjnego SET ilosc_w_magazynie='$nowa_ilosc' WHERE id_produktu =$id_prod;";
       }
     }
   }
 
   if ($polaczenie->multi_query($zapytanie3) === TRUE) {
-    echo "New records created successfully";
   } else {
       echo "Error: " . $zapytanie3 . "<br>" . $polaczenie->error;
   }
 
   if ($polaczenie->multi_query($zapytanie2) === TRUE) {
-    echo "New records updated successfully";
   } else {
       echo "Error: " . $zapytanie2 . "<br>" . $polaczenie->error;
   }
 
+  if ($polaczenie->multi_query($zapytanie4) === TRUE) {
+  } else {
+      echo "Error: " . $zapytanie4 . "<br>" . $polaczenie->error;
+  }
+
   $polaczenie->close();
 
-  //$zapytanie2 = "UPDATE pr_nr_seryjny SET id_zamowienia='$id_zam', WHERE nr_seryjny IN( ) ";
+ $_SESSION['chart'] = array();
+ $_SESSION['chart-num'] = 0;
+ $_SESSION['chart-val'] = 0;
 
 
-//   $sql = "INSERT INTO MyGuests (firstname, lastname, email)
-// VALUES ('John', 'Doe', 'john@example.com');";
-// $sql .= "INSERT INTO MyGuests (firstname, lastname, email)
-// VALUES ('Mary', 'Moe', 'mary@example.com');";
-// $sql .= "INSERT INTO MyGuests (firstname, lastname, email)
-// VALUES ('Julie', 'Dooley', 'julie@example.com')";
-
-// if ($conn->multi_query($sql) === TRUE) {
-//     echo "New records created successfully";
-// } else {
-//     echo "Error: " . $sql . "<br>" . $conn->error;
-// }
-
-// $conn->close();
-
-header('Location: ../sklep.php?info=Pomyślnie złożono zamówienie');
+header('Location: ../sklep.php?'.$message);
 ?>

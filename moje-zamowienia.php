@@ -96,6 +96,11 @@ JOIN produkty on pr_nr_seryjny.id_produktu=produkty.id
 include "header.php"
 ?>
 
+
+<?php
+include "info-blad.php"
+?>
+
 <table class="table table-striped">
   <thead>
     <tr>

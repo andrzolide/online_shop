@@ -43,10 +43,8 @@
 				$_SESSION['nazwisko'] = $wiersz['nazwisko'];
 				$_SESSION['funkcja'] = $wiersz['funkcja'];
 				$_SESSION['domyslny_adres'] = $wiersz['domyslny_adres'];
+				$_SESSION['email'] = $wiersz['email'];
 
-
-
-				
 				unset($_SESSION['blad']);
 				$rezultat->free_result();
 				header('Location: sklep.php');

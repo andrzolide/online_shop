@@ -57,9 +57,18 @@ include "header.php"
   <div class="form-group row">
     <label for="inputPassword" class="col-sm-2 col-form-label">Domyślny adres</label>
     <div class="col-sm-3">
-      <input class="form-control" name="domyslny_adres" placeholder="Podaj email"value="<?php echo $_SESSION['domyslny_adres']; ?>">
+      <input class="form-control" name="domyslny_adres" placeholder="Podaj adres"value="<?php echo $_SESSION['domyslny_adres']; ?>">
     </div>
   </div>
+
+
+  <div class="form-group row">
+    <label for="inputPassword" class="col-sm-2 col-form-label">Email</label>
+    <div class="col-sm-3">
+      <input class="form-control" name="email" placeholder="Podaj email"value="<?php echo $_SESSION['email']; ?>">
+    </div>
+  </div>
+
   <input type="submit" class="btn btn-success" value="Zapisz" />
 </form>
 
