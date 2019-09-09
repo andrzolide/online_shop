@@ -29,6 +29,11 @@
 		<input type="submit" value="Zaloguj się" />
 	
 	</form>
+
+    <form action="dodaj_kategoria.php" method="post">
+		<input type="submit" value="Dodaj produkt" />
+	
+	</form>
 	
 <?php
 	if(isset($_SESSION['blad']))	echo $_SESSION['blad'];

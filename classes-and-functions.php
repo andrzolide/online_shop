@@ -30,6 +30,32 @@
 	   	{
 	     	return $this->id_kategorii;             
 	   	}  
+    }
+    
+    class Parametr{
+		private $id;
+		private $nazwa;
+		private $id_kategorii;
+
+		public function __construct($id,$nazwa,$id_kategorii)
+	   	{
+	   		$this->id = $id;
+	      	$this->nazwa = $nazwa;
+	      	$this->id_kategorii = $id_kategorii;
+	   	}
+
+		public function getId()
+	   	{
+	     	return $this->id;             
+	   	}  
+	   	public function getNazwa()
+	   	{
+	     	return $this->nazwa;             
+	   	}  
+	   	public function getIdKategorii()
+	   	{
+	     	return $this->id_kategorii;             
+	   	}  
 	}
 
 	class ProduktKoszyk{
