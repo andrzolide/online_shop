@@ -132,7 +132,7 @@ include "info-blad.php"
       $nr_ser=$value->getNumerSeryjny();
       $nazwa_prod=$value->getNazwa();
       $string_pom="id_zamowienia=".$id_zam."&id_prod_bez_nr_ser=".$id_prod_bez_nr."&nr_ser=".$nr_ser."&nazwa_prod=".$nazwa_prod;
-      echo $string_pom . "</br>";
+      //echo $string_pom . "</br>";
        ?>
 
     </tr>

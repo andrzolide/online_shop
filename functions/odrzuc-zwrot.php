@@ -1,7 +1,7 @@
 <?php 
 include "../includes/czy-admin.php";
 
-require_once "connect.php";
+require_once "../connect.php";
 
 $message="";
   	if(isset($_GET['id_zwrotu'])){

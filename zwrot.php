@@ -5,13 +5,15 @@ $id_zam="";
 $id_prod_bez_nr="";
 $nr_ser="";
 $nazwa_prod="";
+$status="";
 
 if(isset($_GET['id_zamowienia'])){$id_zam=$_GET['id_zamowienia'];}
 if(isset($_GET['id_prod_bez_nr_ser'])){$id_prod_bez_nr=$_GET['id_prod_bez_nr_ser'];}
 if(isset($_GET['nr_ser'])){$nr_ser=$_GET['nr_ser'];}
 if(isset($_GET['nazwa_prod'])){$nazwa_prod=$_GET['nazwa_prod'];}
+if(isset($_GET['status'])){$status=$_GET['status'];}
 
-$string_pom="id_zamowienia=".$id_zam."&id_prod_bez_nr_ser=".$id_prod_bez_nr."&nr_ser=".$nr_ser."&nazwa_prod=".$nazwa_prod;
+$string_pom="id_zamowienia=".$id_zam."&id_prod_bez_nr_ser=".$id_prod_bez_nr."&nr_ser=".$nr_ser."&nazwa_prod=".$nazwa_prod."&status=".$status;
 
 
   ?>

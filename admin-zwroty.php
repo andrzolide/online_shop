@@ -71,7 +71,7 @@ LEFT JOIN produkty on produkty.id= id_produktu_bez_seryjnego OR produkty.id=pr_n
 <?php
 include "header.php"
 ?>
-
+ <center>  <h2> Zwroty</h> </center>
 
 <?php
 include "info-blad.php"
