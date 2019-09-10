@@ -46,7 +46,6 @@ LEFT JOIN produkty on produkty.id= id_produktu_bez_seryjnego OR produkty.id=pr_n
           }
 
       } else {
-          echo "0 results";
       }
       
     }

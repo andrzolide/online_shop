@@ -6,10 +6,10 @@ $id_prod_bez_nr="";
 $nr_ser="";
 $nazwa_prod="";
 
-if(isset($_GET['id_zamowienia'])){$id_zam=$_GET['id_zamowienia'];echo $id_zam;}
-if(isset($_GET['id_prod_bez_nr_ser'])){$id_prod_bez_nr=$_GET['id_prod_bez_nr_ser'];echo $id_prod_bez_nr;}
-if(isset($_GET['nr_ser'])){$nr_ser=$_GET['nr_ser'];echo $nr_ser;}
-if(isset($_GET['nazwa_prod'])){$nazwa_prod=$_GET['nazwa_prod'];echo $nazwa_prod;}
+if(isset($_GET['id_zamowienia'])){$id_zam=$_GET['id_zamowienia'];}
+if(isset($_GET['id_prod_bez_nr_ser'])){$id_prod_bez_nr=$_GET['id_prod_bez_nr_ser'];}
+if(isset($_GET['nr_ser'])){$nr_ser=$_GET['nr_ser'];}
+if(isset($_GET['nazwa_prod'])){$nazwa_prod=$_GET['nazwa_prod'];}
 
 $string_pom="id_zamowienia=".$id_zam."&id_prod_bez_nr_ser=".$id_prod_bez_nr."&nr_ser=".$nr_ser."&nazwa_prod=".$nazwa_prod;
 
@@ -36,7 +36,7 @@ include "header.php"
   <div class="form-group row">
     <label  class="col-sm-2 col-form-label">Nazwa produktu</label>
     <div class="col-sm-10">
-      <input type="text" readonly class="form-control-plaintext" name="productName" value="Procesor">
+      <input type="text" readonly class="form-control-plaintext" name="productName" value="<?php echo $nazwa_prod ?>">
     </div>
   </div>
 	  <div class="form-group row">
@@ -48,7 +48,7 @@ include "header.php"
   <div class="container">
   <div class="row">
     <div class="col-sm">
-  <button type="button"  onclick="location.href = 'http://localhost/sklep/moje-zamowienia.php';" class="btn btn-secondary ">Powrót</button>
+  <button type="button"  onclick="location.href = 'moje-zamowienia.php';" class="btn btn-secondary ">Powrót</button>
     </div>
     <div class="col-sm">
   <input type="submit" class="btn btn-success" value="Wyślij Zwrot" />

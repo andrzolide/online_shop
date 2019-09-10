@@ -55,7 +55,14 @@ include "info-blad.php"
     <?php   foreach ($produkty_do_wyswietlenia as  $value) { ?>
     <tr>
       <th scope="row"><?php echo $value->produkt->getId() ?></th>
-      <td><?php echo $value->produkt->getNazwa() ?></td>
+      
+
+      <?php 
+	$id_produktu=$value->produkt->getId(); 
+	$nazwa_prod=$value->produkt->getNazwa();
+	$cena_prod=$value->produkt->getCena();
+	?>
+      <td><a href="produkt.php?nazwa=<?php echo $nazwa_prod; ?>&cena=<?php echo $cena_prod; ?>&id_produktu=<?php echo $id_produktu ?>"><?php echo $value->produkt->getNazwa(); ?></a></td>
       <td><?php echo $value->produkt->getCena() ?></td>
       <td>
         

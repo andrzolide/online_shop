@@ -51,7 +51,6 @@ LEFT JOIN produkty on produkty.id= id_produktu_bez_seryjnego OR produkty.id=pr_n
           }
 
       } else {
-          echo "0 results";
       }
       
     }
@@ -158,7 +157,7 @@ include "header.php"
   <div class="container">
   <div class="row">
     <div class="col-sm">
-  <button type="button"  onclick="location.href = 'http://localhost/sklep/admin-reklamacje.php';" class="btn btn-secondary ">Powrót</button>
+  <button type="button"  onclick="location.href = 'admin-reklamacje.php';" class="btn btn-secondary ">Powrót</button>
     </div>
   <div class="col-sm">
 <?php 

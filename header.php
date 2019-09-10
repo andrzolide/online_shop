@@ -14,7 +14,7 @@
     if(isset($_SESSION['funkcja'])){
         if($_SESSION['funkcja']=='magazynier'){
 ?>
-  <a class="navbar-brand" href="admin.php">Panel menagera</a>
+  <a class="navbar-brand" href="admin.php">Panel magazyniera</a>
   <?php  
         }
     }

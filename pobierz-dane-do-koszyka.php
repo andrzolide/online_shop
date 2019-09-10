@@ -6,7 +6,6 @@
       if($string != "") { $string = $string . ", "; }
         $string = $string . $id;
       }
-      echo "string pomocniczy: " . $string . "</br>";
 
     return $string;
   }
@@ -28,7 +27,6 @@
     echo "Error: ".$polaczenie->connect_errno;
   }
   else{
-    echo "PRODUKTY: </br>";
 
     $zapytanie="";
 
@@ -52,10 +50,9 @@
             }
 
         } else {
-            echo "0 results";
         }
       }else{
-        echo "Blad przy wykonywaniu zapytania";
+        // echo "Blad przy wykonywaniu zapytania";
       }
 
 
@@ -81,15 +78,6 @@
       array_push($produkty_do_wyswietlenia, $value);
     }
   }
-
-foreach ($produkty_z_numerami_seryjnymi_ilosc as $key => $value) {
-  echo $key . " and value: ". $value;
-}
-echo "-----</br>";
-foreach ($produkty_do_wyswietlenia as $key => $value) {
-  echo $value->produkt->getNazwa();
-  echo " </br>";
-}
 
 
 

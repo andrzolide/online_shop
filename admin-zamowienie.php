@@ -36,7 +36,7 @@ JOIN produkty on pr_nr_seryjny.id_produktu=produkty.id
   
   $zapytanie1= "";
   $zapytanie1= "
-SELECT produkty.id as 'produkt_id', produkty.cena, pr_bez_nr_seryjnego_zamowienia.ilosc ,  zamowienia.id as 'zamowienie_id', id_klienta,data,adres_dostawy, nazwa FROM zamowienia
+SELECT produkty.id as 'produkt_id', produkty.cena, pr_bez_nr_seryjnego_zamowienia.ilosc ,  zamowienia.id as 'zamowienie_id', id_klienta,data,adres_dostawy, nazwa, zamowienia.status FROM zamowienia
 LEFT JOIN pr_bez_nr_seryjnego_zamowienia on zamowienia.id=pr_bez_nr_seryjnego_zamowienia.id_zamowienia
 JOIN produkty on pr_bez_nr_seryjnego_zamowienia.id_produktu=produkty.id
   WHERE zamowienia.id=$zamowienie";
@@ -47,7 +47,7 @@ JOIN produkty on pr_bez_nr_seryjnego_zamowienia.id_produktu=produkty.id
         while($row = $rezultat->fetch_assoc()) {
           //array_push($zamowienia, new Zamowienie($row["id"],$row["id_klienta"],$row["data"],$row["adres_dostawy"]));
           //echo "NAZWA PRODUKTU: ". $row["id"] . " ID KATEGORII: " . $row["data"] . "</br>";
-          array_push($produkty_zamowien, new ProduktZamowienie($row["produkt_id"],$row["nazwa"],$row["ilosc"],$row["cena"],"",$row["data"],$row["zamowienie_id"],$row["adres_dostawy"]));
+          array_push($produkty_zamowien, new ProduktZamowienie($row["produkt_id"],$row["nazwa"],$row["ilosc"],$row["cena"],"",$row["data"],$row["zamowienie_id"],$row["adres_dostawy"],$row["status"]));
         }
     } else {
         //echo "0 results";
@@ -59,7 +59,7 @@ JOIN produkty on pr_bez_nr_seryjnego_zamowienia.id_produktu=produkty.id
   //PRODUKTY ZMAWOEN
 
   $zapytanie2= "";
-  $zapytanie2= "SELECT produkty.id as 'produkt_id', produkty.cena, zamowienia.id as 'zamowienie_id', id_klienta,data,adres_dostawy, nr_seryjny, nazwa FROM zamowienia 
+  $zapytanie2= "SELECT produkty.id as 'produkt_id', produkty.cena, zamowienia.id as 'zamowienie_id', id_klienta,data,adres_dostawy, nr_seryjny, nazwa, zamowienia.status FROM zamowienia 
 JOIN pr_nr_seryjny on pr_nr_seryjny.id_zamowienia = zamowienia.id
 JOIN produkty on pr_nr_seryjny.id_produktu=produkty.id
   WHERE zamowienia.id=$zamowienie";
@@ -71,7 +71,7 @@ JOIN produkty on pr_nr_seryjny.id_produktu=produkty.id
         while($row = $rezultat->fetch_assoc()) {
           //array_push($zamowienia, new Zamowienie($row["id"],$row["id_klienta"],$row["data"],$row["adres_dostawy"]));
           //echo "NAZWA PRODUKTU: ". $row["id"] . " ID KATEGORII: " . $row["data"] . "</br>";
-          array_push($produkty_zamowien, new ProduktZamowienie($row["produkt_id"],$row["nazwa"],1,$row["cena"],$row["nr_seryjny"],$row["data"],$row["zamowienie_id"],$row["adres_dostawy"]));
+          array_push($produkty_zamowien, new ProduktZamowienie($row["produkt_id"],$row["nazwa"],1,$row["cena"],$row["nr_seryjny"],$row["data"],$row["zamowienie_id"],$row["adres_dostawy"],$row["status"]));
         }
     } else {
         //echo "0 results";
@@ -163,7 +163,7 @@ echo '<a href="functions/ustaw-status-zamowienia.php?status=w_trakcie&id_zamowie
     </div>
     <div class="col-sm">
 <?php 
-echo '<a href="functions/ustaw-status-zamowienia.php?status=zrezlizowane&id_zamowienia='.$produkty_zamowien[0]->getIdZamowienia().'"><button type="button" class="btn btn-primary">Status zamówienia: Zrealizowane</button></a>';
+echo '<a href="functions/ustaw-status-zamowienia.php?status=zrealizowane&id_zamowienia='.$produkty_zamowien[0]->getIdZamowienia().'"><button type="button" class="btn btn-primary">Status zamówienia: Zrealizowane</button></a>';
  ?>
     </div>
 <?php } ?>

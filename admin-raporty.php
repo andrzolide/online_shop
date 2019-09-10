@@ -62,10 +62,10 @@ include "header.php"
 
   <div class="row">
     <div class="col-sm">
-	<button type="button"  onclick="location.href = 'http://localhost/sklep/admin.php';" class="btn btn-secondary ">Powrót</button>
+	<button type="button"  onclick="location.href = 'admin.php';" class="btn btn-secondary ">Powrót</button>
     </div>
     <div class="col-sm">
-	<button type="button" onclick="location.href = 'http://localhost/sklep/admin-raport.php';" class="btn btn-success">Pokaż raport</button>
+	<button type="button" onclick="location.href = 'admin-raport.php';" class="btn btn-success">Pokaż raport</button>
     </div>
     
   </div>

@@ -1,15 +1,15 @@
 <?php 
 include "../includes/czy-admin.php";
 
-require_once "connect.php";
+require_once "../connect.php";
 
 $message="";
   	if(isset($_GET['id_zamowienia'])&&isset($_GET['status'])){
     	$id_zamowienia=$_GET['id_zamowienia'];
 
     	$status;
-    	if($_GET['status']=='zrezlizowane'){
-    		$status="zrezlizowane";
+    	if($_GET['status']=='zrealizowane'){
+    		$status="zrealizowane";
     	}
     	if($_GET['status']=='w_trakcie'){
     		$status="w-trakcie";
@@ -22,7 +22,7 @@ $message="";
 
 
 		
-		$zapytanie="UPDATE zamowienia SET status = '$status' WHERE id = $id_zamowienia";
+		$zapytanie="UPDATE `zamowienia` SET status = '$status' WHERE id = $id_zamowienia";
 
 		  if ($polaczenie->connect_errno!=0)
 		  {

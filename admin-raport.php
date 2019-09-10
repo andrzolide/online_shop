@@ -37,7 +37,7 @@ include "header.php"
 
 <div class="row">
     <div class="col-sm">
-	<button type="button"  onclick="location.href = 'http://localhost/sklep/admin-raporty.php';" class="btn btn-secondary ">Powrót</button>
+	<button type="button"  onclick="location.href = 'admin.php';" class="btn btn-secondary ">Powrót</button>
     </div>
     
   </div>
