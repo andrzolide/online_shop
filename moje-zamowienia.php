@@ -139,7 +139,7 @@ include "info-blad.php"
       $nazwa_prod=$value->getNazwa();
       $status=$value->getStatus();
       $string_pom="id_zamowienia=".$id_zam."&id_prod_bez_nr_ser=".$id_prod_bez_nr."&nr_ser=".$nr_ser."&nazwa_prod=".$nazwa_prod."&status=".$status;
-      echo $string_pom;
+      // echo $string_pom;
        ?>
       <td><a href="zwrot.php?<?php echo $string_pom ?>"><button type="button" class="btn btn-light btn-ms ">Zwróć produkt</button></a></td>
      <td><a href="reklamacja.php?<?php echo $string_pom ?>"><button type="button" class="btn btn-warning btn-ms ">Zgłoś reklamacje</button></a></td>
