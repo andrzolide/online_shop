@@ -94,7 +94,7 @@
 
 
 	$get_id_kategorii;
-	if (isset($_GET['kategoria']) && $_GET['kategoria'] != 1)
+	if (isset($_GET['kategoria']))
 	{
 		$get_id_kategorii=$_GET["kategoria"];
 		//echo " szukam produktów dla kategorii: ". $get_id_kategorii . "</br>";

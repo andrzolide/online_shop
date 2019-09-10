@@ -38,8 +38,10 @@ Szymon
 tabele i poprawki front.
 
 
-do zrobienia: ogarnąć powroty
-to co mowil szymon
+do zrobienia: 
+-linki powrótów
+-title strony
+-testy
 przetestować różne rzeczy dla zerowych wartości i maksymalnych .
 
 wszedzie dodac linki do produktów gdzie wyswietla sie nazwa prduktu. 
