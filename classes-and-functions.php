@@ -102,9 +102,10 @@
 		private $numer_seryjny;
 		private $data;
 		private $id_zamowienia;
-		private $adres_dostawy;
+        private $adres_dostawy;
+        private $status;
 
-		public function __construct($id_produktu, $nazwa, $ilosc, $cena, $numer_seryjny, $data, $id_zamowienia, $adres_dostawy)
+		public function __construct($id_produktu, $nazwa, $ilosc, $cena, $numer_seryjny, $data, $id_zamowienia, $adres_dostawy, $status)
 	   	{
 	   		$this->id_produktu=$id_produktu;
 	   		$this->nazwa=$nazwa;
@@ -113,7 +114,8 @@
 	   		$this->numer_seryjny=$numer_seryjny;
 	   		$this->data=$data;
 	   		$this->id_zamowienia=$id_zamowienia;
-	   		$this->adres_dostawy=$adres_dostawy;
+               $this->adres_dostawy=$adres_dostawy;
+               $this->status=$status;
 	   	}
 
 		public function getIdProduktu()
@@ -147,7 +149,11 @@
 	   	public function getAdresDostawy()
 	   	{
 	     	return $this->adres_dostawy;             
-	   	} 
+           } 
+           public function getStatus()
+	   	{
+	     	return $this->status;             
+	   	}
 
 
 	}

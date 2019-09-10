@@ -16,7 +16,7 @@ WHERE 1
 
   $zamowienia=array();
 
-  $zapytanie="SELECT zamowienia.id, id_klienta,data,adres_dostawy,status,login FROM zamowienia
+  $zapytanie="SELECT zamowienia.id, id_klienta,data,adres_dostawy,zamowienia.status,login FROM zamowienia
 JOIN klienci on zamowienia.id_klienta = klienci.id
 WHERE 1";
   
@@ -43,7 +43,6 @@ WHERE 1";
           // }
 
       } else {
-          echo "0 results";
       }
       
     }
@@ -103,7 +102,7 @@ include "info-blad.php"
     
     <?php foreach ($zamowienia as $value) { ?>
       
-    <tr <?php if($value->getStatus()=="zrezlizowane"){echo 'class="table-success"';} 
+    <tr <?php if($value->getStatus()=="zrealizowane"){echo 'class="table-success"';} 
               else if($value->getStatus()=="do-realizacji"){echo 'class="table-danger"';} 
 
     ?>>
@@ -122,7 +121,7 @@ include "info-blad.php"
 <div class="container">
   <div class="row">
     <div class="col-sm">
-	<button type="button"  onclick="location.href = 'http://localhost/sklep/admin.php';" class="btn btn-secondary ">Powrót</button>
+	<button type="button"  onclick="location.href = 'admin.php';" class="btn btn-secondary ">Powrót</button>
     </div>
    
   </div>

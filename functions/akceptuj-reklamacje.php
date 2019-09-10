@@ -1,7 +1,7 @@
 <?php 
 include "../includes/czy-admin.php";
 
-require_once "connect.php";
+require_once "../connect.php";
 
 $message="";
   	if(isset($_GET['id_zwrotu'])){
@@ -30,7 +30,6 @@ $message="";
   	else{
   		$message="blad=Nie udało się zaakceptować reklamacji";
   	}
-echo $message;
 header('Location: ../admin-reklamacje.php?'.$message);
 
  ?>

@@ -75,7 +75,6 @@
 		    	}
 	    	}
 	    }
-	    echo "string pomocniczy: " . $string . "</br>";
 
 		return $string;
 	}
@@ -196,41 +195,13 @@ include "header.php"
 <div style="width:80%;  float:right">
 <nav class="navbar navbar-expand-lg navbar-light bg-white py-3 shadow-sm">
   <div class="container">
-    <a href="#" class="navbar-brand font-weight-bold">Wybierz filtry</a>
-    <button type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbars" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler">
-              <span class="navbar-toggler-icon"></span>
-          </button>
-
+  <div style="width:10%;  float:right">
+<h5>Sortowanie:</h5>
 
     <div id="navbarContent" class="collapse navbar-collapse">
       <ul class="navbar-nav mr-auto">
         <!-- Level one dropdown -->
-        <li class="nav-item dropdown">
-          <a id="dropdownMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Kategorie</a>
-          <ul aria-labelledby="dropdownMenu1" class="dropdown-menu border-0 shadow">
-          <?php foreach ($kategorie as $kat){ ?>
-
-		  	<li class="dropdown-submenu">
-              	<a id="dropdownMenu2" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle"><?php echo $kat->getNazwa(); ?></a>
-			  	<ul aria-labelledby="dropdownMenu2" class="dropdown-menu border-0 shadow">  
-			    	<li><a href=" <?php echo "?kategoria=" . $kat->getId(); ?> " class="dropdown-item">Wszystkie</a></li>  
-
-          	<?php foreach ($kat->podkategorie as $podkat) { ?>
-
-					<div class="dropdown-divider"></div>             
-                	<li><a href=" <?php echo "?kategoria=" . $podkat->getId(); ?> " class="dropdown-item"><?php echo $podkat->getNazwa(); ?></a></li>
-
-		  	<?php } ?>
-
-              	</ul>
-            </li>
-
-		  <?php } ?>
-
-         
-          </ul>
-        </li>
-        <!-- End Level one -->
+        
 <li>
 
 </li>

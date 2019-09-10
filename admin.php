@@ -14,7 +14,7 @@ include "includes/czy-admin.php";
 </head>
 
 <body>
-	<center><h2>Centrum Administratora</center></h2>
+	<center><h2>Centrum Magazyniera</center></h2>
 <div class="container">
 <div class="row">
   <div class="col-md-3 offset-md-3 m-4"><button type="button"  onclick="location.href = 'admin-zamowienia.php';" class="btn-warning btn-ms ">Zamówienia</button></div>

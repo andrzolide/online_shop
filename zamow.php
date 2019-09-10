@@ -30,7 +30,7 @@ include "header.php"
  <div class="form-group row">
     <label  class="col-sm-2 col-form-label">Imię</label>
     <div class="col-sm-3">
-      <input  class="form-control" name="adres" placeholder="Podaj imię" value="">
+      <input  class="form-control" name="adres" placeholder="Podaj imię" value=<?php echo $_SESSION['imie']; ?>>
     </div>
 	
 	<label for="inputPassword" class="col-sm-2 col-form-label">Adres dostawy</label>
@@ -42,7 +42,7 @@ include "header.php"
   <div class="form-group row">
     <label class="col-sm-2 col-form-label">Nazwisko</label>
     <div class="col-sm-3">
-      <input  class="form-control"  placeholder="Podaj nazwisko">
+      <input  class="form-control"  placeholder="Podaj nazwisko" value="<?php echo $_SESSION['nazwisko']; ?>">
     </div>
 
   </div>
@@ -50,7 +50,7 @@ include "header.php"
   <div class="form-group row">
     <label for="inputPassword" class="col-sm-2 col-form-label">Email</label>
     <div class="col-sm-3">
-      <input class="form-control" name="email" placeholder="Podaj email"value="">
+      <input class="form-control" name="email" placeholder="Podaj email"value="<?php echo $_SESSION['email']; ?>">
     </div>
 
   </div>
@@ -100,7 +100,7 @@ include "header.php"
 <div class="container">
   <div class="row">
     <div class="col-sm">
-	<button type="button"  onclick="location.href = 'http://localhost/sklep/moje-zamowienia.php';" class="btn btn-secondary ">Anuluj</button>
+	<button type="button"  onclick="location.href = 'koszyk.php';" class="btn btn-secondary ">Anuluj</button>
     </div>
     <div class="col-sm">
 	<input type="submit" class="btn btn-success" value="Złóż Zamówienie" />

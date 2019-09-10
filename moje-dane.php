@@ -76,7 +76,7 @@ include "header.php"
 <div class="container">
   <div class="row">
     <div class="col-sm">
-	<button type="button"  onclick="location.href = 'http://localhost/sklep/sklep.php';" class="btn btn-secondary ">Powrót</button>
+	<button type="button"  onclick="location.href = 'sklep.php';" class="btn btn-secondary ">Powrót</button>
     </div>
 
     

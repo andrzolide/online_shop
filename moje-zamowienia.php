@@ -34,7 +34,7 @@ JOIN produkty on pr_nr_seryjny.id_produktu=produkty.id
   
   $zapytanie1= "";
   $zapytanie1= "
-SELECT produkty.id as 'produkt_id', produkty.cena, pr_bez_nr_seryjnego_zamowienia.ilosc ,  zamowienia.id as 'zamowienie_id', id_klienta,data,adres_dostawy, nazwa FROM zamowienia
+SELECT produkty.id as 'produkt_id', produkty.cena, pr_bez_nr_seryjnego_zamowienia.ilosc ,  zamowienia.id as 'zamowienie_id', id_klienta,data,adres_dostawy, nazwa, zamowienia.status FROM zamowienia
 LEFT JOIN pr_bez_nr_seryjnego_zamowienia on zamowienia.id=pr_bez_nr_seryjnego_zamowienia.id_zamowienia
 JOIN produkty on pr_bez_nr_seryjnego_zamowienia.id_produktu=produkty.id
   WHERE id_klienta=$uzytkownik";
@@ -45,10 +45,9 @@ JOIN produkty on pr_bez_nr_seryjnego_zamowienia.id_produktu=produkty.id
         while($row = $rezultat->fetch_assoc()) {
           //array_push($zamowienia, new Zamowienie($row["id"],$row["id_klienta"],$row["data"],$row["adres_dostawy"]));
           //echo "NAZWA PRODUKTU: ". $row["id"] . " ID KATEGORII: " . $row["data"] . "</br>";
-          array_push($produkty_zamowien, new ProduktZamowienie($row["produkt_id"],$row["nazwa"],$row["ilosc"],$row["cena"],"",$row["data"],$row["zamowienie_id"],$row["adres_dostawy"]));
+          array_push($produkty_zamowien, new ProduktZamowienie($row["produkt_id"],$row["nazwa"],$row["ilosc"],$row["cena"],"",$row["data"],$row["zamowienie_id"],$row["adres_dostawy"],$row["status"]));
         }
     } else {
-        echo "0 results";
     }
   }else{
     echo "Błąd przy wykonywaniu zapytania";
@@ -58,7 +57,7 @@ JOIN produkty on pr_bez_nr_seryjnego_zamowienia.id_produktu=produkty.id
   //PRODUKTY ZMAWOEN
 
   $zapytanie2= "";
-  $zapytanie2= "SELECT produkty.id as 'produkt_id', produkty.cena, zamowienia.id as 'zamowienie_id', id_klienta,data,adres_dostawy, nr_seryjny, nazwa FROM zamowienia 
+  $zapytanie2= "SELECT produkty.id as 'produkt_id', produkty.cena, zamowienia.id as 'zamowienie_id', id_klienta,data,adres_dostawy, nr_seryjny, nazwa, zamowienia.status FROM zamowienia 
 JOIN pr_nr_seryjny on pr_nr_seryjny.id_zamowienia = zamowienia.id
 JOIN produkty on pr_nr_seryjny.id_produktu=produkty.id
   WHERE id_klienta=$uzytkownik";
@@ -70,10 +69,9 @@ JOIN produkty on pr_nr_seryjny.id_produktu=produkty.id
         while($row = $rezultat->fetch_assoc()) {
           //array_push($zamowienia, new Zamowienie($row["id"],$row["id_klienta"],$row["data"],$row["adres_dostawy"]));
           //echo "NAZWA PRODUKTU: ". $row["id"] . " ID KATEGORII: " . $row["data"] . "</br>";
-          array_push($produkty_zamowien, new ProduktZamowienie($row["produkt_id"],$row["nazwa"],1,$row["cena"],$row["nr_seryjny"],$row["data"],$row["zamowienie_id"],$row["adres_dostawy"]));
+          array_push($produkty_zamowien, new ProduktZamowienie($row["produkt_id"],$row["nazwa"],1,$row["cena"],$row["nr_seryjny"],$row["data"],$row["zamowienie_id"],$row["adres_dostawy"],$row["status"]));
         }
     } else {
-        echo "0 results";
     }
   }else{
     echo "Błąd przy wykonywaniu zapytania";
@@ -111,6 +109,7 @@ include "info-blad.php"
       <th scope="col">Id zamowienia</th>
       <th scope="col">Data zamowienia</th>
       <th scope="col">Adres dostawy</th>
+      <th scope="col">Status</th>
     <th scope="col">Zwrot</th>
     <th scope="col">Reklamacja</th>
     </tr>
@@ -118,21 +117,29 @@ include "info-blad.php"
   <tbody>
     <?php   foreach ($produkty_zamowien as $value) { ?>
     <tr>
-      <td><?php echo $value->getNazwa() ?></td>
+      <?php 
+	$id_produktu=$value->getIdProduktu(); 
+	$nazwa_prod=$value->getNazwa();
+	$cena_prod=$value->getCena();
+	?>
+      <td><a href="produkt.php?nazwa=<?php echo $nazwa_prod; ?>&cena=<?php echo $cena_prod; ?>&id_produktu=<?php echo $id_produktu ?>"><?php echo $value->getNazwa(); ?></a></td>
+
       <td><?php echo $value->getCena() ?></td>
       <td><?php echo $value->getIlosc() ?></td>
       <td><?php echo $value->getNumerSeryjny() ?></td>
       <td><?php echo $value->getIdZamowienia() ?></td>
       <td><?php echo $value->getData() ?></td>
       <td><?php echo $value->getAdresDostawy() ?></td>
+      <td><?php echo $value->getStatus() ?></td>
 
       <?php 
       $id_zam=$value->getIdZamowienia();
       $id_prod_bez_nr=$value->getIdProduktu();
       $nr_ser=$value->getNumerSeryjny();
       $nazwa_prod=$value->getNazwa();
-      $string_pom="id_zamowienia=".$id_zam."&id_prod_bez_nr_ser=".$id_prod_bez_nr."&nr_ser=".$nr_ser."&nazwa_prod=".$nazwa_prod;
-      echo $string_pom . "</br>";
+      $status=$value->getStatus();
+      $string_pom="id_zamowienia=".$id_zam."&id_prod_bez_nr_ser=".$id_prod_bez_nr."&nr_ser=".$nr_ser."&nazwa_prod=".$nazwa_prod."&status=".$status;
+      
        ?>
       <td><a href="zwrot.php?<?php echo $string_pom ?>"><button type="button" class="btn btn-light btn-ms ">Zwróć produkt</button></a></td>
      <td><a href="reklamacja.php?<?php echo $string_pom ?>"><button type="button" class="btn btn-warning btn-ms ">Zgłoś reklamacje</button></a></td>

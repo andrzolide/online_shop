@@ -46,7 +46,6 @@ LEFT JOIN produkty on produkty.id= id_produktu_bez_seryjnego OR produkty.id=pr_n
           }
 
       } else {
-          echo "0 results";
       }
       
     }
@@ -98,7 +97,7 @@ $params="";
 $id=$value->getId();
 
 $params="id_zwrotu=".$id;
-echo $value->getStatus();
+
  ?>
     <tr <?php if($value->getStatus()=="uznany"){echo 'class="table-success"';} 
               else if($value->getStatus()=="odrzucony"){echo 'class="table-danger"';} 

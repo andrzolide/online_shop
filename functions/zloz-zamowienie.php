@@ -18,8 +18,8 @@
   if(isset($_SESSION['id'])&&isset($_POST['adres'])){
     $id=$_SESSION['id'];
     $adres=$_POST['adres'];
-    $zapytanie = "INSERT INTO zamowienia (id, id_klienta, data, adres_dostawy,status)
-      VALUES ('NULL', '$id', CURDATE(), '$adres', 'do-realizacji')";
+    $zapytanie = "INSERT INTO `zamowienia` (`id`, `id_klienta`, `data`, `adres_dostawy`,`status`)
+      VALUES (NULL, $id, CURDATE(), '$adres', 'do-realizacji')";
   }
 
   if ($polaczenie->query($zapytanie) === TRUE) {
@@ -64,7 +64,6 @@
   $zapytanie4= "";
 
   $id_zam=$polaczenie->insert_id;
-  echo "id odatniego gowna!!!: ".$id_zam."</br>";
 
   if(!empty($produkty_do_zamowienia)){
     foreach ($produkty_do_zamowienia as $key => $prod_to_zam) {
