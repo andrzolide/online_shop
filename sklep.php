@@ -168,11 +168,11 @@ include "header.php"
 
 
 <div style="width:20%;  float:left">
-<h3>Wybierz kategorię:</h3>
 
 
-
-<ul id="myUL">
+<div class="container" >
+	<h3>Wybierz kategorię:</h3>
+  <ul id="myUL" style="background: #f8f9fa;">
 	<?php foreach ($kategorie as $kat){ ?>
   	<li> <span class="caret"><a href="<?php echo "?kategoria=" . $kat->getId(); ?>"><?php echo $kat->getNazwa(); ?></a></span>
 	  	
@@ -185,6 +185,9 @@ include "header.php"
   	</li>
 <?php } ?>
 </ul>
+</div>
+
+
 
 </div>
 
