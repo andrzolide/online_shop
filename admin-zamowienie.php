@@ -93,7 +93,7 @@ JOIN produkty on pr_nr_seryjny.id_produktu=produkty.id
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous"></script>
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-	<title>Admin- zamówienie</title>
+	<title>Sklep- zamówienie</title>
 </head>
 
 <body>

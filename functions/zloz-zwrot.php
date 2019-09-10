@@ -22,7 +22,7 @@ if(isset($_POST['opis'])){$opis=$_POST['opis'];}
 
 $zapytanie= "";
 
-  if($id_zam!=""&&$opis!=""&&$id_prod_bez_nr!=""&&$status=='zrealizowane'){
+  if($id_zam!=""&&$opis!=""&&$id_prod_bez_nr!=""&&$status=="zrealizowane"){
   	if($nr_ser==""){
 	    $zapytanie = "INSERT INTO `zwroty` (`id`, `id_zamowienia`, `id_produktu_bez_seryjnego`, `powod`, `status`)
 	      VALUES (NULL, $id_zam, $id_prod_bez_nr, '$opis', 'zgloszono')";

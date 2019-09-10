@@ -85,7 +85,7 @@ JOIN produkty on pr_nr_seryjny.id_produktu=produkty.id
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-	<title>Osadnicy - gra przeglądarkowa</title>
+	<title>Moje zamówienia</title>
 </head>
 
 <body>
@@ -139,7 +139,7 @@ include "info-blad.php"
       $nazwa_prod=$value->getNazwa();
       $status=$value->getStatus();
       $string_pom="id_zamowienia=".$id_zam."&id_prod_bez_nr_ser=".$id_prod_bez_nr."&nr_ser=".$nr_ser."&nazwa_prod=".$nazwa_prod."&status=".$status;
-      
+      echo $string_pom;
        ?>
       <td><a href="zwrot.php?<?php echo $string_pom ?>"><button type="button" class="btn btn-light btn-ms ">Zwróć produkt</button></a></td>
      <td><a href="reklamacja.php?<?php echo $string_pom ?>"><button type="button" class="btn btn-warning btn-ms ">Zgłoś reklamacje</button></a></td>
