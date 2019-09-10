@@ -172,9 +172,10 @@ include "header.php"
 
 <div class="container" >
 	<h3>Wybierz kategorię:</h3>
-  <ul id="myUL" style="background: #f8f9fa;">
+  <ul class="list-group" id="myUL" style="background: #f8f9fa;">
+  	
 	<?php foreach ($kategorie as $kat){ ?>
-  	<li> <span class="caret"><a href="<?php echo "?kategoria=" . $kat->getId(); ?>"><?php echo $kat->getNazwa(); ?></a></span>
+  	<li class="list-group-item"> <span class="caret"><a href="<?php echo "?kategoria=" . $kat->getId(); ?>"><?php echo $kat->getNazwa(); ?></a></span>
 	  	
 	    <ul class="nested">
 	    	<?php foreach ($kat->podkategorie as $podkat) { ?>
@@ -183,6 +184,7 @@ include "header.php"
 	    </ul>
 		
   	</li>
+
 <?php } ?>
 </ul>
 </div>
