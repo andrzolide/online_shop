@@ -167,6 +167,30 @@
 include "header.php"
 ?>
 
+
+<div style="width:20%;  float:left">
+<h3>Wybierz kategorię:</h3>
+
+
+
+<ul id="myUL">
+	<?php foreach ($kategorie as $kat){ ?>
+  	<li> <span class="caret"><a href="<?php echo "?kategoria=" . $kat->getId(); ?>"><?php echo $kat->getNazwa(); ?></a></span>
+	  	
+	    <ul class="nested">
+	    	<?php foreach ($kat->podkategorie as $podkat) { ?>
+	      	<li><a href="<?php echo "?kategoria=" . $podkat->getId(); ?>"><?php echo $podkat->getNazwa(); ?></a></li>
+	      	<?php } ?>
+	    </ul>
+		
+  	</li>
+<?php } ?>
+</ul>
+
+</div>
+
+
+<div style="width:80%;  float:right">
 <nav class="navbar navbar-expand-lg navbar-light bg-white py-3 shadow-sm">
   <div class="container">
     <a href="#" class="navbar-brand font-weight-bold">Wybierz filtry</a>
@@ -286,7 +310,7 @@ if(isset($_GET['kategoria'])) {
   </tbody>
 </table>
 
-
+</div>
 </body>
 
 
@@ -314,3 +338,61 @@ $(function() {
   });
 });
 </script>
+
+
+
+
+<script>
+var toggler = document.getElementsByClassName("caret");
+var i;
+
+for (i = 0; i < toggler.length; i++) {
+  toggler[i].addEventListener("click", function() {
+    this.parentElement.querySelector(".nested").classList.toggle("active");
+    this.classList.toggle("caret-down");
+  });
+}
+</script>
+
+
+<style>
+/* Remove default bullets */
+ul, #myUL {
+  list-style-type: none;
+}
+
+/* Remove margins and padding from the parent ul */
+#myUL {
+  margin: 0;
+  padding: 0;
+}
+
+/* Style the caret/arrow */
+.caret {
+  cursor: pointer;
+  user-select: none; /* Prevent text selection */
+}
+
+/* Create the caret/arrow with a unicode, and style it */
+.caret::before {
+  content: "\25B6";
+  color: black;
+  display: inline-block;
+  margin-right: 6px;
+}
+
+/* Rotate the caret/arrow icon when clicked on (using JavaScript) */
+.caret-down::before {
+  transform: rotate(90deg);
+}
+
+/* Hide the nested list */
+.nested {
+  display: none;
+}
+
+/* Show the nested list when the user clicks on the caret/arrow (with JavaScript) */
+.active {
+  display: block;
+}
+</style>
