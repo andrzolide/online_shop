@@ -71,7 +71,7 @@
         //dodaj produkty do bazy z seryjnymi
         //wygeneruj string pomocniczy;
         $nr_ser=$prod_to_zam->getNumerSeryjny();
-        $zapytanie2 .= "UPDATE pr_nr_seryjny SET id_zamowienia='$id_zam' WHERE nr_seryjny =$nr_ser;";
+        $zapytanie2 .= "UPDATE pr_nr_seryjny SET id_zamowienia=$id_zam WHERE nr_seryjny =$nr_ser;";
       }
       else{
         //dodaj do drugiej bazy.
@@ -81,25 +81,73 @@
             VALUES ('$id_prod', '$ilosc', '$id_zam');";
         $nowa_ilosc=$prod_to_zam->getIloscNaMagazynie()-$prod_to_zam->getIlosc();
         echo "nowa ilosc ". $nowa_ilosc. "</br>";
-        $zapytanie4.="UPDATE pr_bez_nr_seryjnego SET ilosc_w_magazynie='$nowa_ilosc' WHERE id_produktu =$id_prod;";
+        $zapytanie4.="UPDATE pr_bez_nr_seryjnego SET ilosc_w_magazynie=$nowa_ilosc WHERE id_produktu =$id_prod;";
       }
     }
   }
 
-  if ($polaczenie->multi_query($zapytanie3) === TRUE) {
-  } else {
-      echo "Error: " . $zapytanie3 . "<br>" . $polaczenie->error;
-  }
+  // if ($polaczenie->multi_query($zapytanie3) === TRUE) {
+  // } else {
+  //     echo "Error: " . $zapytanie3 . "<br>" . $polaczenie->error;
+  // }
 
-  if ($polaczenie->multi_query($zapytanie2) === TRUE) {
-  } else {
-      echo "Error: " . $zapytanie2 . "<br>" . $polaczenie->error;
-  }
+  if ($polaczenie->multi_query($zapytanie3)) {
+    do {
+        /* store first result set */
+        if ($result = $polaczenie->store_result()) {
+            while ($row = $result->fetch_row()) {
+                printf("%s\n", $row[0]);
+            }
+            $result->free();
+        }
+        /* print divider */
+        if ($polaczenie->more_results()) {
+            printf("-----------------\n");
+        }
+    } while ($polaczenie->next_result());
+}
 
-  if ($polaczenie->multi_query($zapytanie4) === TRUE) {
-  } else {
-      echo "Error: " . $zapytanie4 . "<br>" . $polaczenie->error;
-  }
+  // if ($polaczenie->multi_query($zapytanie2) === TRUE) {
+  // } else {
+  //     echo "Error: " . $zapytanie2 . "<br>" . $polaczenie->error;
+  // }
+
+    if ($polaczenie->multi_query($zapytanie2)) {
+    do {
+        /* store first result set */
+        if ($result = $polaczenie->store_result()) {
+            while ($row = $result->fetch_row()) {
+                printf("%s\n", $row[0]);
+            }
+            $result->free();
+        }
+        /* print divider */
+        if ($polaczenie->more_results()) {
+            printf("-----------------\n");
+        }
+    } while ($polaczenie->next_result());
+}
+
+  // if ($polaczenie->multi_query($zapytanie4) === TRUE) {
+  // } else {
+  //     echo "Error: " . $zapytanie4 . "<br>" . $polaczenie->error;
+  // }
+
+  if ($polaczenie->multi_query($zapytanie4)) {
+    do {
+        /* store first result set */
+        if ($result = $polaczenie->store_result()) {
+            while ($row = $result->fetch_row()) {
+                printf("%s\n", $row[0]);
+            }
+            $result->free();
+        }
+        /* print divider */
+        if ($polaczenie->more_results()) {
+            printf("-----------------\n");
+        }
+    } while ($polaczenie->next_result());
+}
 
   $polaczenie->close();
 
