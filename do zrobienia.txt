@@ -6,3 +6,43 @@ koszyk - zmienianie ilosc produktow w koszyku czyli ten czerwony i zielony kwadr
 
 DO ZROBIENIA BACKEND:
 filtry do tego czy sa produkty czy ich juz nie ma czy np zostąły wyprzedane. bedziemy potrzebowali info o numerach seryjnych w sklep.php wiec zastanowic sie nad modyfikacja lekka tego jak wczytujemy produkty i czy nie rozszerzyć ich o wczytywanie też wszytkiego tak jak w koszykach. 
+
+
+w momencie dodawania zamowien mosi sie zmniejsac ilosc produktow w sklepie.done 
+
+zamowienie admin troche zmienić zawartosc tabeli. 
+
+
+robienie realizacji zamowien zeby sie updatowało w bazie. done
+
+usuwanie koszyka po złożeniu zamówienia. DONE
+
+panel admina na kliencie sie tez wyswietla DONE
+
+zrobic reklamacja admina done 
+
+
+sortowanie po cenie.  DONE
+
+zestawy.
+
+zwracanie produktu tego samego w nieskonczonosc. 
+
+
+mateusz doda 
+email do klientow
+zwrotu i reklamacja status
+dokonczy formularz do wrzucania produktów. 
+
+Szymon
+tabele i poprawki front.
+
+
+do zrobienia: ogarnąć powroty
+to co mowil szymon
+przetestować różne rzeczy dla zerowych wartości i maksymalnych .
+
+wszedzie dodac linki do produktów gdzie wyswietla sie nazwa prduktu. 
+
+
+

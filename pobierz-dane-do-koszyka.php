@@ -41,7 +41,7 @@
       FROM produkty
       LEFT JOIN pr_bez_nr_seryjnego on produkty.id = pr_bez_nr_seryjnego.id_produktu 
       LEFT JOIN pr_nr_seryjny on produkty.id = pr_nr_seryjny.id_produktu
-      WHERE id IN(" . $string_pomocniczy . ");";
+      WHERE id IN(" . $string_pomocniczy . ") AND pr_nr_seryjny.id_zamowienia IS NULL;";
       if ($rezultat = @$polaczenie->query($zapytanie)){
         if ($rezultat->num_rows > 0) {
             while($row = $rezultat->fetch_assoc()) {
@@ -67,7 +67,7 @@
 
   foreach ($produkty as $key => $value) {
     //echo " selloo". $value->numer_seryjny;
-    if(!empty($value->getNumerSeryjny())&&empty($value->getIdZamowienia())){
+    if(!empty($value->getNumerSeryjny())){
 
       if(isset($produkty_z_numerami_seryjnymi_ilosc[$value->produkt->getId()])){
         $produkty_z_numerami_seryjnymi_ilosc[$value->produkt->getId()]++;

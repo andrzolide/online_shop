@@ -97,7 +97,7 @@
 	if (isset($_GET['kategoria']) && $_GET['kategoria'] != 1)
 	{
 		$get_id_kategorii=$_GET["kategoria"];
-		echo " szukam produktów dla kategorii: ". $get_id_kategorii . "</br>";
+		//echo " szukam produktów dla kategorii: ". $get_id_kategorii . "</br>";
 		if(czy_to_podkategoria($kategorie, $get_id_kategorii)){
 			if (isset($_GET['sort']))
 			{
@@ -122,14 +122,14 @@
 		}
 	}
 	
-	echo "zapytanie: " . $zapytanie . "</br></br>";
+	//echo "zapytanie: " . $zapytanie . "</br></br>";
 
 	if($rezultat = @$polaczenie->query($zapytanie))
 	{
 		if ($rezultat->num_rows > 0) {
 		    while($row = $rezultat->fetch_assoc()) {
 		    	array_push($produkty, new Produkt($row["id"],$row["cena"],$row["nazwa"],$row["id_kategorii"]));
-		    	echo "NAZWA PRODUKTU: ". $row["id"] . " ID KATEGORII: " . $row["nazwa"] . "</br>";
+		    	//echo "NAZWA PRODUKTU: ". $row["id"] . " ID KATEGORII: " . $row["nazwa"] . "</br>";
 		    }
 
 		} else {
@@ -141,7 +141,7 @@
 	}
 
 
-echo "<p>Witaj ".$_SESSION['login'].'! [ <a href="logout.php">Wyloguj się!</a> ]</p>';
+//echo "<p>Witaj ".$_SESSION['login'].'! [ <a href="logout.php">Wyloguj się!</a> ]</p>';
 
 	
 ?>
@@ -267,9 +267,15 @@ if(isset($_GET['kategoria'])) {
 ?>
 
 	<?php  foreach ($produkty as $prod){ ?>
+	<?php 
+	$id_produktu=$prod->getId(); 
+	$nazwa_prod=$prod->getNazwa();
+	$cena_prod=$prod->getCena();
+	?>
+
 	<tr>
       <th scope="row"> <?php echo $prod->getId(); ?></th>
-      <td><?php echo $prod->getNazwa(); ?></td>
+      <td><a href="produkt.php?nazwa=<?php echo $nazwa_prod; ?>&cena=<?php echo $cena_prod; ?>&id_produktu=<?php echo $id_produktu ?>"><?php echo $prod->getNazwa(); ?></a></td>
       <td><?php echo $prod->getCena(); ?></td>
 
       <td><button    type="button" class="btn btn-secondary"> <a style="color:white;" href=" <?php echo "functions/dodaj-do-koszyka.php?id_produktu=". $prod->getId()."&cena=". $prod->getCena(). $kat_pom; ?> ">Dodaj do koszyka</a> </button></td>

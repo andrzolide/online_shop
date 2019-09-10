@@ -81,6 +81,7 @@
         $zapytanie3.="INSERT INTO pr_bez_nr_seryjnego_zamowienia (id_produktu, ilosc, id_zamowienia)
             VALUES ('$id_prod', '$ilosc', '$id_zam');";
         $nowa_ilosc=$prod_to_zam->getIloscNaMagazynie()-$prod_to_zam->getIlosc();
+        echo "nowa ilosc ". $nowa_ilosc. "</br>";
         $zapytanie4.="UPDATE pr_bez_nr_seryjnego SET ilosc_w_magazynie='$nowa_ilosc' WHERE id_produktu =$id_prod;";
       }
     }

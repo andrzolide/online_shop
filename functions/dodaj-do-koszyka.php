@@ -23,6 +23,8 @@
 				if(!empty($value->getNumerSeryjny())){
 			      	if(isset($produkty_z_numerami_seryjnymi_ilosc[$value->produkt->getId()])){
 			      		if($produkty_z_numerami_seryjnymi_ilosc[$value->produkt->getId()]>$value->getIlosc()){
+			      			echo " ilosc z seryjnym: " . $produkty_z_numerami_seryjnymi_ilosc[$value->produkt->getId()]. "</br>";
+			      			echo " ilosc z seryjnym: " . $value->getIlosc(). "</br>";
 			      			$mozna_dodac=true;
 			      			break;
 			      		}
@@ -30,6 +32,8 @@
 			      	}
 			    }else{
 		      		if($value->getIloscNaMagazynie()>$value->getIlosc()){
+		      			echo "ilosc na magazynie: ".$value->getIloscNaMagazynie() . "</br>";
+		      			echo "ilosc na magazynie: ".$value->getIlosc() . "</br>";
 		      			$mozna_dodac=true;
 		      			break;
 		      		}
@@ -77,4 +81,3 @@
 	header('Location: ../sklep.php?'.$message. $kat);
 
 ?>
-asdf

@@ -72,7 +72,9 @@ WHERE 1";
 <body>
 
 <center><h2>Zamówienia</h2></center>
-
+<?php
+include "info-blad.php"
+?>
 <label>Pokaż wyniki o statusie</label>
 <div class="dropdown">
   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -101,7 +103,10 @@ WHERE 1";
     
     <?php foreach ($zamowienia as $value) { ?>
       
-    <tr>
+    <tr <?php if($value->getStatus()=="zrezlizowane"){echo 'class="table-success"';} 
+              else if($value->getStatus()=="do-realizacji"){echo 'class="table-danger"';} 
+
+    ?>>
       <th scope="row"><?php echo $value->getId() ?></th>
 	   <td><?php echo $value->getLogin() ?></td>
       <td><?php echo $value->getData() ?></td>

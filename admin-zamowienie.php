@@ -99,6 +99,10 @@ JOIN produkty on pr_nr_seryjny.id_produktu=produkty.id
 <body>
 
 	<center><h2>Wszystkie produkty</center></h2>
+
+  <?php
+include "info-blad.php"
+?>
 <table class="table table-striped">
   <thead>
     <tr>
@@ -137,24 +141,36 @@ JOIN produkty on pr_nr_seryjny.id_produktu=produkty.id
 </table>
 
 <center><label><b>Ustaw status zamówienia</b></label></center>
-<div class="col-2 offset-md-5"><select class="form-control m-b" name="status">
-                                        <option>Do realizacji</option>
-                                        <option>W realizacji</option>
-                                        <option>Zrelizowane</option>                                       
-                                    </select>
-</div>
-
- <div class="container">
+  <div class="container">
   <div class="row">
     <div class="col-sm">
-	<button type="button"  onclick="location.href = 'http://localhost/sklep/admin-zamowienia.php';" class="btn btn-secondary ">Powrót</button>
     </div>
-    <div class="col-sm offset-4">
-	<button type="button" class="btn btn-success">Zapisz</button>
+
+    <?php if(!empty($produkty_zamowien)){  ?>
+
+      <div class="col-sm">
+<?php 
+
+echo '<a href="functions/ustaw-status-zamowienia.php?status=do_realizacji&id_zamowienia='.$produkty_zamowien[0]->getIdZamowienia().'"><button type="button" class="btn btn-primary">Status zamówienia: Do realizacji</button></a>';
+ ?>
+  
     </div>
+  <div class="col-sm">
+<?php 
+echo '<a href="functions/ustaw-status-zamowienia.php?status=w_trakcie&id_zamowienia='.$produkty_zamowien[0]->getIdZamowienia().'"><button type="button" class="btn btn-primary">Status zamówienia: W trakcie realizacji</button></a>';
+ ?>
+  
+    </div>
+    <div class="col-sm">
+<?php 
+echo '<a href="functions/ustaw-status-zamowienia.php?status=zrezlizowane&id_zamowienia='.$produkty_zamowien[0]->getIdZamowienia().'"><button type="button" class="btn btn-primary">Status zamówienia: Zrealizowane</button></a>';
+ ?>
+    </div>
+<?php } ?>
+      
+
     
   </div>
-</div>
 
 </body>
 </html>

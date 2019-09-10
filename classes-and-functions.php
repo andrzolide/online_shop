@@ -32,6 +32,26 @@
 	   	}  
 	}
 
+		class Parametr{
+		private $nazwa;
+		private $wartosc;
+
+		public function __construct($nazwa,$wartosc)
+	   	{
+	   		$this->nazwa = $nazwa;
+	   		$this->wartosc = $wartosc;
+	   	}
+
+		public function getWartosc()
+	   	{
+	     	return $this->wartosc;             
+	   	}  
+	   	public function getNazwa()
+	   	{
+	     	return $this->nazwa;             
+	   	}  
+	}
+
 	class ProduktKoszyk{
 		public $produkt;
 		private $ilosc;

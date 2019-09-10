@@ -100,8 +100,8 @@ $id=$value->getId();
 $params="id_zwrotu=".$id;
 
  ?>
-        <tr <?php if($value->getStatus()=="uznany"){echo 'style = "background: green;"';} 
-              else if($value->getStatus()=="odrzucony"){echo 'style = "background: red;"';} 
+        <tr <?php if($value->getStatus()=="uznany"){echo 'class="table-success"';} 
+              else if($value->getStatus()=="odrzucony"){echo 'class="table-danger"';} 
 
     ?>>
       <th scope="row"><?php echo $value->getId() ?></th>

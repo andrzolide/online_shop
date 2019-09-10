@@ -1,8 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="col-ms">
-	<button type="button" onclick="location.href = 'admin.php';"  class="btn btn-primary btn-primary btn-lg">Panel administratora</button>
-    </div>
+
     <div class="col-lg">
 	<button type="button" onclick="location.href = 'index.php';" class="btn btn-primary btn-primary btn-lg">Logo</button>
     </div>
